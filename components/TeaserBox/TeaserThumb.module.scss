@@ -1,0 +1,174 @@
+@import "../../styles/settings/_settings";
+
+.teaserThumbContainer {
+
+  &.single {
+    padding-left: 100px;
+    padding-right: 100px;
+
+    @include media("<=desktop") {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    /*
+    @include media("<=tablet") {
+      padding: 0 8px 0 20px;
+    }*/
+  }
+
+  a,
+  a:visited,
+  a:hover,
+  a:focus,
+  a:active,
+  a:link {
+    color: $fontColor;
+
+    .teaserThumb {
+      display: flex;
+      flex-direction: column-reverse;
+      align-content: flex-start;
+      justify-content: flex-end;
+      position: relative;
+      line-height: 0;
+
+      .info {
+        padding-right: 0;
+        white-space: normal;
+        mask-image: none;
+        white-space: normal;
+        margin-top: 20px;
+        margin-bottom: 70px;
+
+        @include media("<=desktop") {
+          margin-top: 15px;
+          margin-bottom: 60px;
+        }
+
+        @include media("<=tablet") {
+          margin-top: 10px;
+          margin-bottom: 50px;
+        }
+
+        h3 {
+          @extend %fontTitleSmall;
+          padding-bottom: 15px;
+          transition: color 0.5s ease;
+          color: $darkerGray;
+          border-bottom: 1px solid $gray;
+        }
+
+        h3::after {
+          content: "";
+          position: absolute;
+          bottom: 0px;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background-color: $green;
+          transform: scaleX(0);
+          transition: transform 0.4s;
+          transition-timing-function: ease;
+          transform-origin: right;
+          transition-delay: 0s;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          width: 100%;
+        }
+
+        .caption {
+          @extend %fontTitleLarge;
+          text-transform: none;
+          max-width: 80%;
+          margin-bottom: 20px;
+
+          &.single {
+            max-width: 60%;
+          }
+        }
+
+        ul {
+          height: fit-content;
+          align-self: flex-end;
+          display: flex;
+          flex-wrap: wrap;
+          margin-bottom: 5px;
+          max-width: 80%;
+
+          &.single {
+            max-width: 60%;
+          }
+
+          li {
+            display: inline;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            line-height: 1.1rem;
+          }
+
+          li:not(:last-child)::after {
+            content: "\00a0/\00a0"
+          }
+        }
+      }
+
+      .thumbImage {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding-bottom: 50%;
+
+        img {
+          position: absolute;
+          left: -40%;
+          width: 180%;
+          clip-path: inset(40% 0% 0% 0%);
+          transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+
+          &.isReveal {
+            clip-path: inset(0% 0% 0% 0%);
+          }
+        }
+      }
+
+      .thumbImageSingle {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding-bottom: 50%;
+
+        img {
+          position: absolute;
+          width: 100%;
+          clip-path: inset(40% 0% 0% 0%);
+          transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+
+          &.isReveal {
+            clip-path: inset(0% 0% 0% 0%);
+          }
+        }
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    a:hover {
+      .teaserThumb {
+        .info {
+          h3::after {
+            transform: scaleX(1);
+            transition-delay: 0.05s;
+            transform-origin: left;
+            background-color: $green;
+          }
+
+          h3 {
+            color: $green;
+          }
+        }
+      }
+    }
+  }
+}
+
+//transition: transform 2s cubic-bezier(0.22, 1, 0.36, 1) 0s;

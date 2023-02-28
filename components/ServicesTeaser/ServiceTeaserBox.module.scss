@@ -1,0 +1,147 @@
+@import "../../styles/settings/_settings";
+
+.containerService {
+    width: 100%;
+    padding-bottom: 25vh;
+    display: flex;
+    flex-direction: row-reverse;
+
+    @include media("<=smallDesktop") {
+        padding-bottom: 15vh;
+    }
+
+    &.videoLeft {
+        flex-direction: row;
+
+        @include media("<=tablet") {
+            flex-direction: unset;
+        }
+    }
+
+    @include media("<=tablet") {
+        flex-direction: unset;
+        flex-wrap: wrap;
+    }
+
+    .serviceVideo {
+        width: 50%;
+        display: flex;
+        align-items: center;
+
+        @include media("<=tablet") {
+            width: 100%;
+        }
+
+        .containerVideo {
+            width: 100%;
+
+            video {
+                width: 100%;
+            }
+        }
+    }
+
+    .serviceText {
+        width: 50%;
+        display: flex;
+        align-items: center;
+
+        @include media("<=tablet") {
+            width: 100%;
+        }
+
+        &.alignRight {
+            align-items: right;
+            justify-content: right;
+            padding-right: 60px;
+
+            @include media("<=tablet") {
+                align-items: left;
+                justify-content: left;
+                padding-right: unset;
+                padding-left: 60px;
+            }
+        }
+
+        &.alignLeft {
+            padding-left: 60px;
+        }
+
+        .containerText {
+
+            &.alignRight {
+                text-align: right;
+
+                @include media("<=tablet") {
+                    text-align: unset;
+                }
+            }
+
+            .title {
+                @extend %fontTitleSmall;
+                margin-bottom: 20px;
+                width: 100%;
+
+                @include media("<=tablet") {
+                    margin-top: 30px;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .service {
+                @extend %fontTitleLarge;
+                margin-bottom: 20px;
+                color: $lightGray;
+                line-height: 2.5rem;
+            }
+
+            .text {
+                margin-bottom: 40px;
+                color: $lightGray;
+                width: 100%;
+            }
+
+            .containerLink {
+                display: flex;
+
+                &.alignRight {
+                    align-items: right;
+                    justify-content: right;
+
+                    @include media("<=tablet") {
+                        align-items: unset;
+                        justify-content: unset;
+                    }
+                }
+
+                .link {
+
+                    a,
+                    a:visited,
+                    a:hover,
+                    a:focus,
+                    a:active,
+                    a:link {
+                        display: flex;
+
+                        .informationLinkArrow {
+                            position: relative;
+                            padding-right: 80px;
+
+                            .informationLinkArrowMask {
+                                position: absolute;
+                                width: 80px;
+                                height: 18px;
+                                overflow: hidden;
+
+                                img {
+                                    transform: translateX(-88px);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+@import "../../styles/settings/_settings";
+
+.informationBoxContainer {
+  width: 100%;
+  height: 200vh;
+
+  .informationBoxContainerInner {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+
+    .informationBoxContent {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      justify-content: center;
+      overflow: hidden;
+
+      .title {
+        @extend %fontTitleSmall;
+        margin-bottom: 50px;
+      }
+
+      .information {
+        @extend %fontSubStatement;
+        text-align: center;
+        max-width: 970px;
+      }
+    }
+  }
+}

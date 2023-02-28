@@ -1,0 +1,84 @@
+@import "../../styles/settings/_settings";
+
+.imageTwoColumnsContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  .containerTwoColumns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    @include media("<=tablet") {
+      flex-wrap: wrap;
+    }
+
+    .containerTwoColumnsColumn {
+      width: 50%;
+
+      @include media("<=tablet") {
+        width: 100%;
+      }
+
+      .containerTwoColumnsColumnInner {
+        width: 100%;
+
+        .imageContainer {
+          position: relative;
+          overflow: hidden;
+          height: auto;
+          padding-top: 60px;
+
+          @include media("<=desktop") {
+            padding-top: 50px;
+          }
+
+          @include media("<=tablet") {
+            padding-top: 40px;
+          }
+
+          img {
+            width: calc(100% + 2px);
+            object-fit: cover;
+            height: auto;
+          }
+
+        }
+      }
+
+      .containerTwoColumnsColumnInner:first-child {
+        .imageContainer {
+          padding-top: 0px;
+        }
+      }
+    }
+
+    .columnLeft {
+      padding-right: 50px;
+
+      @include media("<=desktop") {
+        padding-right: 30px;
+      }
+
+      @include media("<=tablet") {
+        padding-right: 0;
+      }
+    }
+
+    .columnRight {
+      padding-top: 200px;
+      padding-left: 50px;
+
+      @include media("<=desktop") {
+        padding-left: 30px;
+      }
+
+      @include media("<=tablet") {
+        padding-left: 0;
+        padding-top: 40px;
+      }
+    }
+  }
+}

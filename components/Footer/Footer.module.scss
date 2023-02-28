@@ -1,0 +1,115 @@
+@import "../../styles/settings/_settings";
+
+.footer {
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+
+  .footerContainer {
+    height: 100vh;
+    background-color: $black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    .footerContainerInner {
+      width: 100%;
+      color: $white;
+
+      .infoTitle {
+        margin-bottom: 210px;
+        @extend %paddingLR;
+
+        @include media("<=tablet") {
+          margin-bottom: 20vh;
+        }
+
+        .title {
+          @extend %fontXL;
+          margin-bottom: 30px;
+
+          span {
+            color: $green;
+          }
+        }
+
+
+      }
+
+      .infoNavigation {
+        width: 100%;
+        @extend %paddingLR;
+
+        .navRow {
+          display: flex;
+          margin-bottom: 50px;
+
+          @include media("<=tablet") {
+            flex-wrap: wrap;
+          }
+
+          .navCol {
+            margin-right: 175px;
+
+            .navColTitle {
+              text-transform: uppercase;
+              color: $darkestGray;
+              margin-bottom: 10px;
+            }
+
+            .navColContent {
+              color: $darkGray;
+
+              .contact {
+                .address {
+                  margin-bottom: 20px;
+
+
+                }
+
+                a {
+                  text-transform: none;
+                }
+              }
+            }
+          }
+        }
+
+      }
+
+      .infoFoot {
+        width: 100%;
+        padding: 0 100px 50px 100px;
+
+        @include media("<=desktop") {
+          padding: 0 60px 30px 60px;
+        }
+
+        @include media("<=tablet") {
+          padding: 0 20px;
+          padding: 0 20px 30px 20px;
+        }
+
+        .copyright {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          font-size: 0.6rem;
+          letter-spacing: 0.1rem;
+          color: $darkGray;
+        }
+
+        .separator {
+          display: block;
+          background-color: $darkGray;
+          height: 1px;
+          width: 100%;
+          margin-top: 20px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

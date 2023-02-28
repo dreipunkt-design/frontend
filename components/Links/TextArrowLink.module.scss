@@ -1,0 +1,68 @@
+@import "../../styles/settings/_settings";
+
+.textArrowLinkContainer {
+
+    a,
+    a:visited,
+    a:hover,
+    a:focus,
+    a:active,
+    a:link {
+        display: flex;
+
+        .linkLabel {
+            position: relative;
+            color: $fontColor;
+            transition: color 0.5s ease;
+        }
+
+        .linkLabel::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: $green;
+            transform: scaleX(0);
+            transition: transform 0.4s;
+            transition-timing-function: ease;
+            transform-origin: right;
+            transition-delay: 0s;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .linkArrow {
+            position: relative;
+            margin-left: 15px;
+            padding-right: 80px;
+
+            .linkArrowMask {
+                position: absolute;
+                width: 80px;
+                height: 18px;
+                overflow: hidden;
+
+                img {
+                    transform: translateX(-88px);
+                }
+            }
+        }
+    }
+
+    @media (hover: hover) {
+        a:hover {
+            .linkLabel {
+                color: $green;
+            }
+
+            .linkLabel::after {
+                transform: scaleX(1);
+                transition-delay: 0.05s;
+                transform-origin: left;
+                background-color: $green;
+            }
+
+        }
+    }
+}

@@ -1,0 +1,32 @@
+@import "../../styles/settings/_settings";
+
+.singleColumnContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+
+    .singleColumnContainerInner {
+        width: 100%;
+
+        .imageContainer {
+            position: relative;
+            overflow: hidden;
+            height: auto;
+
+            video {
+                width: calc(100% + 2px);
+                height: auto;
+                object-fit: cover;
+            }
+
+            img {
+                width: calc(100% + 2px);
+                object-fit: cover;
+                height: auto;
+            }
+
+        }
+    }
+}

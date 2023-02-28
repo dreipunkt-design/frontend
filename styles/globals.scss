@@ -1,0 +1,602 @@
+// Settings
+@import "./settings/reset.scss";
+@import "./settings/breakpoints.scss";
+@import "./settings/_settings";
+
+// Pages
+@import "./Gsap.scss";
+
+* {
+  /*cursor: none;*/
+}
+
+html {
+  font-size: 16px;
+
+  @include media("<=desktop") {
+    font-size: 14px;
+  }
+
+  @include media("<=tablet") {
+    font-size: 12px;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: $fontFamily;
+    letter-spacing: $letterSpacingContent;
+    background-color: $bgColor;
+    letter-spacing: $letterSpacingContent;
+    line-height: $lineHeightContent;
+    overscroll-behavior-y: none;
+    overflow: hidden;
+  }
+}
+
+h1 {
+  font-family: $fontFamily;
+}
+
+div {
+  @include media("<=tablet") {
+    line-height: 1.4;
+  }
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+a,
+a:visited,
+a:hover,
+a:focus,
+a:active,
+a:link {
+  text-transform: uppercase;
+  color: $fontColor;
+  text-decoration: none;
+  color: $green;
+  font-family: $fontFamily;
+  font-size: 0.8rem;
+}
+
+a.link,
+a.link:visited,
+a.link:hover,
+a.link:focus,
+a.link:active,
+a.link:link {
+  position: relative;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $green;
+  display: inline-block;
+  transition: color 0.5s ease;
+  font-size: 1rem;
+  font-family: $fontFamily;
+}
+
+a.link::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: $green;
+  transform: scaleX(0);
+  transition: transform 0.4s;
+  transition-timing-function: ease;
+  transform-origin: right;
+  transition-delay: 0s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) {
+  a.link:hover {
+    color: $white;
+  }
+
+  a.link:hover::after {
+    transform: scaleX(1);
+    transition-delay: 0.05s;
+    transform-origin: left;
+    background-color: $white;
+  }
+}
+
+a.footerNavigationLink,
+a.footerNavigationLink:visited,
+a.footerNavigationLink:hover,
+a.footerNavigationLink:focus,
+a.footerNavigationLink:active,
+a.footerNavigationLink:link {
+  position: relative;
+  text-decoration: none;
+  color: $darkGray;
+  display: inline-block;
+  transition: color 0.5s ease;
+  text-transform: none;
+  font-size: 1.4rem;
+}
+
+a.footerNavigationLink::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: $darkGray;
+  transform: scaleX(0);
+  transition: transform 0.4s;
+  transition-timing-function: ease;
+  transform-origin: right;
+  transition-delay: 0s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) {
+  a.footerNavigationLink:hover {
+    color: $green;
+  }
+
+  a.footerNavigationLink:hover::after {
+    transform: scaleX(1);
+    transition-delay: 0.05s;
+    transform-origin: left;
+    background-color: $green;
+  }
+}
+
+a.footerGetInTouchLink,
+a.footerGetInTouchLink:visited,
+a.footerGetInTouchLink:hover,
+a.footerGetInTouchLink:focus,
+a.footerGetInTouchLink:active,
+a.footerGetInTouchLink:link {
+  position: relative;
+  text-decoration: none;
+  color: $white;
+  display: inline-block;
+  transition: color 0.5s ease;
+  text-transform: none;
+  @extend %fontXL;
+
+  span {
+    color: $green;
+  }
+}
+
+a.footerGetInTouchLink::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: $white;
+  transform: scaleX(0);
+  transition: transform 0.4s;
+  transition-timing-function: ease;
+  transform-origin: right;
+  transition-delay: 0s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) {
+  a.footerGetInTouchLink:hover {
+    color: $green;
+
+    span {
+      color: $white;
+    }
+  }
+
+  a.footerGetInTouchLink:hover::after {
+    transform: scaleX(1);
+    transition-delay: 0.05s;
+    transform-origin: left;
+    background-color: $green;
+  }
+}
+
+a.footerlink,
+a.footerlink:visited,
+a.footerlink:hover,
+a.footerlink:focus,
+a.footerlink:active,
+a.footerlink:link {
+  position: relative;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $darkGray;
+  display: inline-block;
+  transition: color 0.5s ease;
+  font-size: 0.6rem;
+  letter-spacing: 0.1rem;
+}
+
+a.footerlink::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: $darkGray;
+  transform: scaleX(0);
+  transition: transform 0.4s;
+  transition-timing-function: ease;
+  transform-origin: right;
+  transition-delay: 0s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) {
+  a.footerlink:hover {
+    color: $green;
+  }
+
+  a.footerlink:hover::after {
+    transform: scaleX(1);
+    transition-delay: 0.05s;
+    transform-origin: left;
+    background-color: $green;
+  }
+}
+
+a.navlink,
+a.navlink:visited,
+a.navlink:hover,
+a.navlink:focus,
+a.navlink:active,
+a.navlink:link {
+  position: relative;
+  text-transform: none;
+  text-decoration: none;
+  color: $white;
+  display: inline-block;
+  transition: color 0.5s ease;
+  font-size: 3rem;
+  font-family: $fontFamily;
+}
+
+a.navlink::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: $white;
+  transform: scaleX(0);
+  transition: transform 0.4s;
+  transition-timing-function: ease;
+  transform-origin: right;
+  transition-delay: 0s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) {
+  a.navlink:hover {
+    color: $black;
+  }
+
+  a.navlink:hover::after {
+    transform: scaleX(1);
+    transition-delay: 0.05s;
+    transform-origin: left;
+    background-color: $black;
+  }
+}
+
+a.navinfolink,
+a.navinfolink:visited,
+a.navinfolink:hover,
+a.navinfolink:focus,
+a.navinfolink:active,
+a.navinfolink:link {
+  position: relative;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $white;
+  display: inline-block;
+  transition: color 0.5s ease;
+  font-size: 1rem;
+  font-family: $fontFamily;
+}
+
+a.navinfolink::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: $white;
+  transform: scaleX(0);
+  transition: transform 0.4s;
+  transition-timing-function: ease;
+  transform-origin: right;
+  transition-delay: 0s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) {
+  a.navinfolink:hover {
+    color: $black;
+  }
+
+  a.navinfolink:hover::after {
+    transform: scaleX(1);
+    transition-delay: 0.05s;
+    transform-origin: left;
+    background-color: $black;
+  }
+}
+
+a.linkgreen,
+a.linkgreen:visited,
+a.linkgreen:hover,
+a.linkgreen:focus,
+a.linkgreen:active,
+a.linkgreen:link {
+  position: relative;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $green;
+  display: inline-block;
+  transition: color 0.5s ease;
+  font-size: 1rem;
+  font-family: $fontFamily;
+}
+
+a.linkgreen::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: $green;
+  transform: scaleX(0);
+  transition: transform 0.4s;
+  transition-timing-function: ease;
+  transform-origin: right;
+  transition-delay: 0s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) {
+  a.linkgreen:hover {
+    color: $green;
+  }
+
+  a.linkgreen:hover::after {
+    transform: scaleX(1);
+    transition-delay: 0.05s;
+    transform-origin: left;
+    background-color: $green;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  height: 100%;
+
+  .row {
+    display: flex;
+    height: 100%;
+  }
+
+  .v-center {
+    align-items: center;
+  }
+
+  .space-between {
+    justify-content: space-between;
+  }
+}
+
+.container-fluid {
+  width: 100%;
+  height: 100%;
+
+  .row {
+    display: flex;
+    height: 100%;
+  }
+}
+
+.content-width-limit {
+  max-width: 650px;
+}
+
+// Standard-Abstände links und rechts für all Inhalte
+.content-padding {
+  padding: 0 500px 0 550px;
+
+  @include media("<=extralargeDesktop") {
+    padding: 0 300px 0 350px;
+  }
+
+  @include media("<=largeDesktop") {
+    padding: 0 280px 0 330px;
+  }
+
+  @include media("<=desktop") {
+    padding: 0 200px 0 250px;
+  }
+
+  @include media("<=smallDesktop") {
+    padding: 0 60px;
+  }
+
+  @include media("<=tablet") {
+    padding: 0 20px;
+  }
+}
+
+.content-padding-small-right {
+  padding: 0 350px 0 450px;
+
+  @include media("<=extralargeDesktop") {
+    padding: 0 250px 0 350px;
+  }
+
+  @include media("<=largeDesktop") {
+    padding: 0 200px 0 330px;
+  }
+
+  @include media("<=desktop") {
+    padding: 0 150px 0 250px;
+  }
+
+  @include media("<=smallDesktop") {
+    padding: 0 60px;
+  }
+
+  @include media("<=tablet") {
+    padding: 0 20px;
+  }
+}
+
+.content-padding-right {
+  padding-right: 500px;
+
+  @include media("<=extralargeDesktop") {
+    padding-right: 300px;
+  }
+
+  @include media("<=largeDesktop") {
+    padding-right: 280px;
+  }
+
+  @include media("<=desktop") {
+    padding-right: 200px;
+  }
+
+  @include media("<=smallDesktop") {
+    padding-right: 60px;
+  }
+
+  @include media("<=tablet") {
+    padding-right: 20px;
+  }
+}
+
+.content-padding-left {
+  padding-left: 550px;
+
+  @include media("<=extralargeDesktop") {
+    padding-left: 350px;
+  }
+
+  @include media("<=largeDesktop") {
+    padding-left: 330px;
+  }
+
+  @include media("<=desktop") {
+    padding-left: 250px;
+  }
+
+  @include media("<=smallDesktop") {
+    padding-left: 60px;
+  }
+
+  @include media("<=tablet") {
+    padding-left: 20px;
+  }
+}
+
+// -----------------------------------
+// Content Sections
+// Standard-Abstand oben
+.content-padding-top {
+  padding-top: 135px;
+
+  @include media("<=desktop") {
+    padding-top: 120px;
+  }
+
+  @include media("<=tablet") {
+    padding-top: 40px;
+  }
+}
+
+// Text-Abstand oben und unten
+.content-padding-top-text {
+  padding-top: 180px;
+  padding-bottom: 45px;
+
+  @include media("<=desktop") {
+    padding-top: 160px;
+    padding-bottom: 45px;
+  }
+
+  @include media("<=tablet") {
+    padding-top: 80px;
+    padding-bottom: 45px;
+  }
+}
+
+// Abstand oben für ersten Abschnitt
+.content-padding-top-extra {
+  padding-top: 230px;
+
+  @include media("<=desktop") {
+    padding-top: 170px;
+  }
+
+  @include media("<=tablet") {
+    padding-top: 100px;
+  }
+}
+
+// -----------------------------------
+// Content Elemente
+.title-padding-bottom {
+  padding-bottom: 80px;
+
+  @include media("<=desktop") {
+    padding-bottom: 60px;
+  }
+
+  @include media("<=tablet") {
+    padding-bottom: 40px;
+  }
+}
+
+// ScrollContainer
+.scroller {
+  height: 100vh;
+}
+
+.scrollbar-track.show {
+  background: none;
+}
+
+.intro,
+.description,
+.conclusion {
+  width: 100vw;
+  height: 100vh;
+  background-color: lightgrey;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.description {
+  background-color: white;
+}
+
+.pin-spacer {
+  z-index: -1;
+}

@@ -1,0 +1,64 @@
+@import "../../styles/settings/_settings";
+
+.servicesContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  .containerColumns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    .containerColumnsInner {
+      width: 33.33%;
+      text-align: center;
+
+      @include media("<=tablet") {
+        width: 100%;
+      }
+
+      .serviceImage {
+        margin-bottom: 20px;
+      }
+
+      .serviceTitle {
+        @extend %fontTitleSmall;
+        margin-bottom: 20px;
+      }
+
+      .serviceText {
+        position: relative;
+      }
+    }
+
+    .paddingColLeft {
+      padding-right: 50px;
+
+      @include media("<=tablet") {
+        padding-right: 0;
+      }
+    }
+
+    .paddingColCenter {
+      padding-right: 25px;
+      padding-left: 25px;
+
+      @include media("<=tablet") {
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
+
+    .paddingColRight {
+      padding-left: 50px;
+
+      @include media("<=tablet") {
+        padding-left: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+@import "../../styles/settings/_settings";
+
+.informationBoxImageContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  .containerTwoColumns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media("<=tablet") {
+      flex-wrap: wrap;
+    }
+
+    .containerTwoColumnsInner {
+      width: 50%;
+
+      @include media("<=tablet") {
+        width: 100%;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .columnLeft {
+      padding-right: 50px;
+
+      @include media("<=largeDesktop") {
+        padding-right: 30px;
+      }
+
+      @include media("<=tablet") {
+        padding-right: 0;
+      }
+
+
+    }
+
+    .columnRight {
+      padding-left: 50px;
+
+      @include media("<=largeDesktop") {
+        padding-left: 30px;
+      }
+
+      @include media("<=tablet") {
+        padding-left: 0;
+      }
+    }
+
+    .title {
+      @extend %fontTitleSmall;
+      margin-bottom: 20px;
+    }
+
+    .text {
+      @extend %fontTitleLarge;
+      margin-bottom: 20px;
+    }
+
+    .containerInformationRight {
+      text-align: left;
+    }
+
+    .containerInformationLeft {
+      text-align: right;
+    }
+  }
+}

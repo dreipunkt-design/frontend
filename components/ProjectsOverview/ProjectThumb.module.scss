@@ -1,0 +1,243 @@
+@import "../../styles/settings/_settings";
+
+.projectThumbContainer {
+  // Large 
+  grid-column: 6 / -5;
+
+  @include media("<=smallDesktop") {
+    grid-column: 7 / -4;
+  }
+
+  @include media("<=tablet") {
+    grid-area: auto / 1;
+  }
+
+  &.largeLeft {
+    grid-area: span 3 / 5 / auto / span 9;
+
+    @include media("<=smallDesktop") {
+      grid-area: span 3 / 6 / auto / span 9;
+    }
+
+    @include media("<=tablet") {
+      grid-area: auto / 1;
+    }
+  }
+
+  &.mediumLeft {
+    grid-column: 1 / span 15;
+
+    @include media("<=tablet") {
+      grid-area: auto / 1;
+    }
+  }
+
+  &.mediumRight {
+    grid-column: 9 / -1;
+
+    @include media("<=tablet") {
+      grid-area: auto / 1;
+    }
+  }
+
+  &.mediumRightRowSpan {
+    grid-column: 15 / -4;
+
+    @include media("<=smallDesktop") {
+      grid-column: 16 / -3;
+    }
+
+    @include media("<=tablet") {
+      grid-area: auto / 1;
+    }
+  }
+
+  &.mediumMarginLeft {
+    grid-column: 5 / span 10;
+
+    @include media("<=smallDesktop") {
+      grid-column: 6 / span 10;
+    }
+
+    @include media("<=tablet") {
+      grid-area: auto / 1;
+    }
+  }
+
+  &.mediumMarginRight {
+    grid-column: 12 / -4;
+
+    @include media("<=smallDesktop") {
+      grid-column: 13 / -3;
+    }
+
+    @include media("<=tablet") {
+      grid-area: auto / 1;
+    }
+  }
+
+  &.smallLeft {
+    grid-column: 1 / span 15;
+
+    @include media("<=tablet") {
+      grid-area: auto / 1;
+    }
+  }
+
+  &.smallRight {
+    grid-column: 17 / -1;
+
+    @include media("<=tablet") {
+      grid-area: auto / 1;
+    }
+  }
+
+  &.smallMarginLeft {
+    grid-column: 5 / span 6;
+
+    @include media("<=smallDesktop") {
+      grid-column: 6 / span 6;
+    }
+
+    @include media("<=tablet") {
+      grid-area: auto / 1;
+    }
+  }
+
+  &.smallMarginRight {
+    grid-column: 9 / -5;
+
+    @include media("<=smallDesktop") {
+      grid-column: 10 / -4;
+    }
+
+    @include media("<=tablet") {
+      grid-area: auto / 1;
+    }
+  }
+
+  &.previewPrev {
+    grid-column: 6 / span 7;
+  }
+
+  &.previewNext {
+    grid-column: 14 / span 7;
+  }
+
+  a,
+  a:visited,
+  a:hover,
+  a:focus,
+  a:active,
+  a:link {
+    color: $fontColor;
+
+    .projectThumb {
+      display: flex;
+      flex-direction: column-reverse;
+      align-content: flex-start;
+      justify-content: flex-end;
+      position: relative;
+      line-height: 0;
+      visibility: hidden;
+
+      .info {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 0;
+        white-space: normal;
+        mask-image: none;
+        white-space: normal;
+        width: 100%;
+        flex-wrap: wrap;
+        margin-top: 15px;
+        visibility: hidden;
+
+        @include media("<=desktop") {
+          margin-top: 15px;
+        }
+
+        @include media("<=tablet") {
+          margin-top: 10px;
+          //margin-bottom: 50px;
+        }
+
+        h3 {
+          @extend %fontTitleSmall;
+          color: $black;
+          margin-bottom: 5px;
+          transition: color 0.5s ease;
+        }
+
+        h3::after {
+          content: "";
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background-color: $green;
+          transform: scaleX(0);
+          transition: transform 0.4s;
+          transition-timing-function: ease;
+          transform-origin: right;
+          transition-delay: 0s;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        ul {
+          height: fit-content;
+          align-self: flex-end;
+          display: flex;
+          flex-wrap: wrap;
+          margin-bottom: 5px;
+
+          li {
+            display: inline;
+            @extend %fontTitleSmall;
+            color: $black;
+            /*
+            font-size: 0.8rem;
+            line-height: 1.1rem;
+            */
+          }
+
+          li:not(:last-child)::after {
+            content: ",\00a0"
+          }
+        }
+      }
+
+      .thumbImageSingle {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding-bottom: 60%;
+
+        &.portrait {
+          padding-bottom: 140%;
+        }
+
+        img {
+          position: absolute;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    a:hover {
+      .projectThumb {
+        .info {
+          h3::after {
+            transform: scaleX(1);
+            transition-delay: 0.05s;
+            transform-origin: left;
+            background-color: $green;
+          }
+        }
+      }
+    }
+  }
+}

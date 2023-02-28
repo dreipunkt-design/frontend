@@ -1,0 +1,124 @@
+@import "../../styles/settings/_settings";
+
+.projectsContainer {
+  width: 100%;
+  margin-top: 200px;
+
+  @include media("<=desktop") {
+    margin-top: 150px;
+  }
+
+  @include media("<=tablet") {
+    margin-top: 100px;
+  }
+
+  padding: 0 100px;
+
+  @include media("<=desktop") {
+    padding: 0 60px;
+  }
+
+  @include media("<=tablet") {
+    padding: 0 20px;
+  }
+
+  .projectsGrid {
+    display: grid;
+    gap: 6rem 20px;
+    margin-bottom: 6rem;
+    grid-template-columns: repeat(24, 1fr);
+
+    @include media("<=largeDesktop") {
+      gap: 4rem 20px;
+    }
+
+    @include media("<=desktop") {
+      gap: 4rem 10px;
+    }
+
+    @include media("<=tablet") {
+      grid-template-columns: 1fr;
+      gap: 4rem 0;
+    }
+
+    /*
+    @include media("<=desktop") {
+      padding: 0 200px 0 250px;
+    }
+  
+    @include media("<=smallDesktop") {
+      padding: 0 60px;
+    }
+  
+    @include media("<=tablet") {
+      padding: 0 20px;
+    }*/
+  }
+
+  /*
+  padding: 200px 534px 0 550px;
+
+  @include media("<=extralargeDesktop") {
+    padding: 200px 434px 0 450px;
+  }
+
+  @include media("<=largeDesktop") {
+    padding: 200px 314px 0 330px;
+  }
+
+  @include media("<=desktop") {
+    padding: 150px 44px 0 60px;
+  }
+
+  @include media("<=tablet") {
+    padding: 100px 4px 0 20px;
+  }*/
+
+  /*
+  .containerOneColumns {
+    width: 100%
+  }
+
+  .containerTwoColumns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media("<=tablet") {
+      flex-wrap: wrap;
+    }
+
+    .containerTwoColumnsInner {
+      width: 50%;
+
+      @include media("<=tablet") {
+        width: 100%;
+      }
+    }
+
+    .columnLeft {
+      padding-right: 50px;
+
+      @include media("<=largeDesktop") {
+        padding-right: 30px;
+      }
+
+      @include media("<=tablet") {
+        padding-right: 0;
+      }
+    }
+
+    .columnRight {
+      padding-left: 50px;
+
+      @include media("<=largeDesktop") {
+        padding-left: 30px;
+      }
+
+      @include media("<=tablet") {
+        padding-left: 0;
+      }
+    }
+  }*/
+}

@@ -1,0 +1,108 @@
+@import "../../styles/settings/_settings";
+
+.cursor {
+    position: fixed;
+    top: 400px;
+    left: 400px;
+    width: 25px;
+    height: 25px;
+    background: $green;
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    transition: all 0.2s ease-out;
+    transition-property: width, height, border;
+    will-change: width, height, transform, border;
+    pointer-events: none;
+    z-index: 999;
+
+    img {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .caption {
+        position: absolute;
+        margin: auto;
+        top: 50%;
+        left: 50%;
+        color: $white;
+        transform: translate(-50%, -50%);
+    }
+
+    &.news {
+        width: 0px;
+        height: 0px;
+    }
+
+    &.none {
+        width: 0px;
+        height: 0px;
+    }
+
+    &.hovered {
+        background: transparent !important;
+        width: 100px; //56px;
+        height: 100px; //56px;
+        border: 2px solid $green;
+    }
+
+    &.caption {
+        width: 200px;
+        height: 200px;
+        background-color: rgba(0, 136, 118, 0.7) !important;
+        transform: translate(-50%, -75%);
+    }
+
+    &.project {
+        width: 80px;
+        height: 80px;
+        background-color: rgba(0, 136, 118, 0.7) !important;
+        transform: translate(-50%, -75%);
+    }
+
+    &.locked {
+        background: transparent !important;
+        width: 56px;
+        height: 56px;
+        border: 2px solid $green;
+    }
+
+    &.navigation {
+        background: $black;
+    }
+
+    &.navigationHovered {
+        border: 2px solid $black;
+    }
+}
+
+.imageContainer {
+    position: fixed;
+    top: 400px;
+    left: 400px;
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    transition: all 0.2s ease-out;
+    transition-property: width, height, border;
+    will-change: width, height, transform, border;
+    pointer-events: none;
+    z-index: 999;
+    width: 25px;
+    height: 25px;
+    overflow: hidden;
+
+    &.news {
+        width: 350px;
+        height: 350px;
+    }
+
+    .imageContainerInner {
+        img {
+            width: 100%;
+        }
+    }
+}

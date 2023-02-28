@@ -1,0 +1,70 @@
+@import "../../styles/settings/_settings";
+
+.containerScrollProgressBar {
+    position: fixed;
+    top: 50%;
+    left: 50px;
+
+    @include media("<=desktop") {
+        left: 30px;
+    }
+
+    @include media("<=tablet") {
+        left: 10px;
+    }
+
+    transform: translateY(calc(-50% + 25px));
+    z-index: 10;
+    height: 280px;
+    overflow: hidden;
+    width: 1px;
+
+    .fixBar {
+        background-color: $green;
+        height: 50px;
+        width: 1px;
+    }
+
+    .progressBar {
+        background-color: $white;
+        height: 280px;
+        width: 1px;
+        position: relative;
+
+        .progressBarFill {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: $green;
+            height: 0;
+            transition: height 0.5s cubic-bezier(0.25, 0.05, 0.1, 0.94);
+        }
+    }
+
+    .scrollProgressBar::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        transform: translateY(-100%);
+        background-color: $green;
+    }
+
+    .scrollProgressBar {
+        height: 230px;
+        width: 1px;
+        background-color: $white;
+        position: relative;
+
+        .scrollProgressBarFill {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: $green;
+            height: 0;
+            transition: height 0.5s cubic-bezier(0.25, 0.05, 0.1, 0.94);
+        }
+    }
+}

@@ -1,0 +1,104 @@
+@import "../../styles/settings/_settings";
+
+.header {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 100px;
+  pointer-events: none;
+
+  @include media("<=desktop") {
+    margin-top: 60px;
+  }
+
+  @include media("<=tablet") {
+    margin-top: 30px;
+  }
+
+  @extend %paddingLR;
+
+  .logo {
+    a {
+      @extend %fontLogo;
+      pointer-events: all;
+
+      &.white {
+        color: $white;
+      }
+
+      &.black {
+        color: $black
+      }
+
+      &.navigation {
+        color: $white;
+      }
+    }
+  }
+
+  .hamburger {
+    width: 30px;
+    padding-left: 12px;
+    pointer-events: all;
+    cursor: pointer;
+
+    .nav {
+      width: 5px;
+      padding-top: 5px;
+      right: 0;
+
+      span {
+        display: block;
+        height: 5px;
+        width: 5px;
+        border-radius: 50%;
+        mix-blend-mode: difference;
+        margin-bottom: 5px;
+        transition: all 0.1s ease-out;
+
+        &.white {
+          background-color: $white;
+        }
+
+        &.black {
+          background-color: $black;
+        }
+
+        &.close {
+          background-color: $white !important;
+          width: 16px;
+          border-radius: 3px;
+          transform: translateX(-4px);
+        }
+
+        &.noclose {
+          visibility: hidden;
+        }
+      }
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        span {
+          background-color: $green !important;
+          width: 16px;
+          border-radius: 3px;
+          transform: translateX(-4px);
+
+          &.close {
+            background-color: $black !important;
+            width: 20px;
+            transform: translateX(-6px);
+          }
+
+          &.noclose {
+            width: 0;
+            transform: translateX(-4px);
+          }
+        }
+      }
+    }
+  }
+}

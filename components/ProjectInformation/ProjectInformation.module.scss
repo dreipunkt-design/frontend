@@ -1,0 +1,60 @@
+@import "../../styles/settings/_settings";
+
+.projectInformationContainer {
+  width: 100%;
+
+  @include media("<=tablet") {
+    margin-bottom: 50px;
+  }
+
+  .titleContainer {
+    display: flex;
+    justify-content: space-between;
+    white-space: normal;
+    mask-image: none;
+    width: 100%;
+    flex-wrap: wrap;
+
+    h1 {
+      @extend %fontSubStatement;
+      text-transform: uppercase;
+      display: inline;
+      height: fit-content;
+      align-self: flex-end;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      height: fit-content;
+      align-self: flex-end;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+
+      li {
+        @extend %fontTitleSmall;
+        color: $black;
+        display: inline;
+        line-height: 1.5;
+
+        @include media("<=tablet") {
+          line-height: 1.2;
+        }
+      }
+
+      li:not(:last-child)::after {
+        content: ",\00a0"
+      }
+    }
+  }
+
+  .descriptionContainer {
+    display: flex;
+    width: 100%;
+    margin-bottom: 50px;
+
+    .description {
+      max-width: 970px;
+    }
+  }
+}

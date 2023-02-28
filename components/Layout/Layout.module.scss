@@ -1,0 +1,20 @@
+@import "../../styles/settings/_settings";
+
+.layoutContainer {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+
+    .layoutMainContent {
+        position: relative;
+        z-index: 1;
+        background-color: $bgColor;
+        padding-bottom: 150px;
+    }
+
+    .layoutFooterSpacer {
+        height: 400px;
+        width: 100%;
+        background: none;
+    }
+}
