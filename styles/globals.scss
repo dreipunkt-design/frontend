@@ -420,6 +420,10 @@ a.linkgreen::after {
 .content-padding {
   padding: 0 500px 0 550px;
 
+  @include media("<=ultralargeDesktop") {
+    padding: 0 400px 0 450px;
+  }
+
   @include media("<=extralargeDesktop") {
     padding: 0 300px 0 350px;
   }
@@ -468,6 +472,10 @@ a.linkgreen::after {
 .content-padding-right {
   padding-right: 500px;
 
+  @include media("<=ultralargeDesktop") {
+    padding-right: 400px;
+  }
+
   @include media("<=extralargeDesktop") {
     padding-right: 300px;
   }
@@ -491,6 +499,10 @@ a.linkgreen::after {
 
 .content-padding-left {
   padding-left: 550px;
+
+  @include media("<=ultralargeDesktop") {
+    padding-left: 450px;
+  }
 
   @include media("<=extralargeDesktop") {
     padding-left: 350px;
