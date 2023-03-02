@@ -42,7 +42,7 @@ const ProjectImageFullWidth = ({ detail }) => {
         img.to(q(elem), { y: '30vh' })
         ScrollTrigger.create({
           trigger: cref,
-          start: 'bottom 80%',
+          start: 'bottom 70%',
           end: 'bottom top',
           animation: img,
           scrub: true

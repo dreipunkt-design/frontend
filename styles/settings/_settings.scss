@@ -121,14 +121,43 @@ $footerHeight: 400px;
 $footerHeightTablet: 400px;
 $footerHeightPhone: 500px;
 
-%paddingLR {
-  padding: 0 88px 0 100px;
+%paddingHeaderLeft {
+  padding-left: 100px;
 
   @include media("<=desktop") {
-    padding: 0 48px 0 60px;
+    padding-left: 60px;
   }
 
   @include media("<=tablet") {
-    padding: 0 8px 0 20px;
+    padding-left: 20px;
+  }
+}
+
+%paddingHeaderRight {
+  padding-right: 88px;
+
+  @include media("<=desktop") {
+    padding-right: 48px;
+  }
+
+  @include media("<=tablet") {
+    padding-right: 8px;
+  }
+}
+
+%paddingLR {
+  @extend %paddingHeaderLeft;
+  @extend %paddingHeaderRight;
+}
+
+%paddingTitleBottom {
+  padding-bottom: 60px;
+
+  @include media("<=desktop") {
+    padding-bottom: 40px;
+  }
+
+  @include media("<=tablet") {
+    padding-bottom: 20px;
   }
 }

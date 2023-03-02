@@ -22,7 +22,7 @@ const ProjectInformation = ({ project }) => {
 
   useEffect(() => {
     if (layoutRendered) {
-      const q = gsap.utils.selector(cref);
+      /*const q = gsap.utils.selector(cref);
       tl.current = gsap.timeline({ paused: true });
       tl.current.from(q(`.${styles.titleContainer}>h1`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .3)
         .from(q(`.${styles.titleContainer}>ul`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .5)
@@ -34,37 +34,43 @@ const ProjectInformation = ({ project }) => {
         start: "top 70%",
         end: "bottom 20%",
         toggleActions: "play none none none"
-      })
+      })*/
     }
   }, [layoutRendered]);
 
   return (
     <>
       <section ref={el => cref = el}>
-        <motion.div className={`${styles.projectInformationContainer} content-padding content-padding-top-extra`}
+        <motion.div className={`${styles.projectInformationContainer} content-padding-right content-padding-top-extra`}
           exit={{ opacity: 0 }}
           transition={transition_opacity}
         >
-          <div className={`${styles.titleContainer} title-padding-bottom`}>
+          <div className={styles.titleContainer}>
             <h1>{project.attributes.title}</h1>
-            <ul>
-              {project.attributes.services.data && project.attributes.services.data.map((service) => {
-                return (
-                  <li key={`${project.id}-${service.id}`}>{service.attributes.label}</li>
-                );
-              })}
-            </ul>
           </div>
-          <div className={styles.descriptionContainer}>
-            <div className={styles.description}>{project.attributes.description}</div>
+          <div className={styles.informationContainer}>
+            <div className={styles.serviceContainer}>
+              <ul>
+                {project.attributes.services.data && project.attributes.services.data.map((service) => {
+                  return (
+                    <li key={`${project.id}-${service.id}`}>{service.attributes.label}</li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className={styles.descriptionContainer}>
+              <div className={styles.description}>{project.attributes.description}</div>
+            </div>
           </div>
-          <Link href={`http://${project.attributes.web}`} passHref={true}>
-            <a target="_blank"
-              className="linkgreen"
-              onMouseEnter={() => onCursor("hovered")}
-              onMouseLeave={() => onCursor()}
-            >{project.attributes.web}</a>
-          </Link>
+          <div className={styles.linkContainer}>
+            <Link href={`http://${project.attributes.web}`} passHref={true}>
+              <a target="_blank"
+                className="linkgreen"
+                onMouseEnter={() => onCursor("none")}
+                onMouseLeave={() => onCursor()}
+              >{project.attributes.web}</a>
+            </Link>
+          </div>
         </motion.div>
       </section>
     </>

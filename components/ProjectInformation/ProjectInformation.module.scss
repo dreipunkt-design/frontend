@@ -1,60 +1,136 @@
 @import "../../styles/settings/_settings";
 
+
 .projectInformationContainer {
   width: 100%;
+  @extend %paddingHeaderLeft;
 
   @include media("<=tablet") {
     margin-bottom: 50px;
   }
 
   .titleContainer {
-    display: flex;
-    justify-content: space-between;
-    white-space: normal;
-    mask-image: none;
-    width: 100%;
-    flex-wrap: wrap;
+    @extend %paddingTitleBottom;
+    padding-left: 550px;
+
+    @include media("<=ultralargeDesktop") {
+      padding-left: 450px;
+    }
+
+    @include media("<=extralargeDesktop") {
+      padding-left: 350px;
+    }
+
+    @include media("<=largeDesktop") {
+      padding-left: 330px;
+    }
+
+    @include media("<=desktop") {
+      padding-left: 250px;
+    }
+
+    @include media("<=smallDesktop") {
+      padding-left: 0;
+    }
 
     h1 {
       @extend %fontSubStatement;
       text-transform: uppercase;
-      display: inline;
-      height: fit-content;
-      align-self: flex-end;
-      margin-bottom: 10px;
-    }
-
-    ul {
-      height: fit-content;
-      align-self: flex-end;
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-
-      li {
-        @extend %fontTitleSmall;
-        color: $black;
-        display: inline;
-        line-height: 1.5;
-
-        @include media("<=tablet") {
-          line-height: 1.2;
-        }
-      }
-
-      li:not(:last-child)::after {
-        content: ",\00a0"
-      }
     }
   }
 
-  .descriptionContainer {
-    display: flex;
-    width: 100%;
-    margin-bottom: 50px;
+  .linkContainer {
+    padding-left: 550px;
 
-    .description {
-      max-width: 970px;
+    @include media("<=ultralargeDesktop") {
+      padding-left: 450px;
+    }
+
+    @include media("<=extralargeDesktop") {
+      padding-left: 350px;
+    }
+
+    @include media("<=largeDesktop") {
+      padding-left: 330px;
+    }
+
+    @include media("<=desktop") {
+      padding-left: 250px;
+    }
+
+    @include media("<=smallDesktop") {
+      padding-left: 0;
+    }
+  }
+
+  .informationContainer {
+    display: flex;
+
+    @include media("<=smallDesktop") {
+      flex-wrap: wrap;
+      flex-direction: column-reverse;
+    }
+
+    .serviceContainer {
+      flex: 0 0 550px;
+
+      @include media("<=ultralargeDesktop") {
+        flex: 0 0 450px;
+      }
+
+      @include media("<=extralargeDesktop") {
+        flex: 0 0 350px;
+      }
+
+      @include media("<=largeDesktop") {
+        flex: 0 0 330px;
+      }
+
+      @include media("<=desktop") {
+        flex: 0 0 250px;
+      }
+
+      @include media("<=smallDesktop") {
+        flex: none;
+        width: 100%;
+      }
+
+      ul {
+        height: fit-content;
+        align-self: flex-end;
+        display: flex;
+        flex-wrap: wrap;
+
+        @include media("<=smallDesktop") {
+          margin-bottom: 50px;
+        }
+
+        li {
+          @extend %fontTitleSmall;
+          color: $black;
+          display: inline;
+          line-height: 1.5;
+          width: 100%;
+
+          @include media("<=tablet") {
+            line-height: 1.2;
+          }
+        }
+      }
+    }
+
+    .descriptionContainer {
+      margin-bottom: 50px;
+      flex: 1;
+
+      @include media("<=smallDesktop") {
+        flex: none;
+        width: 100%;
+      }
+
+      .description {
+        max-width: 970px;
+      }
     }
   }
 }

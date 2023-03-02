@@ -569,20 +569,6 @@ a.linkgreen::after {
   }
 }
 
-// -----------------------------------
-// Content Elemente
-.title-padding-bottom {
-  padding-bottom: 80px;
-
-  @include media("<=desktop") {
-    padding-bottom: 60px;
-  }
-
-  @include media("<=tablet") {
-    padding-bottom: 40px;
-  }
-}
-
 // ScrollContainer
 .scroller {
   height: 100vh;
