@@ -14,10 +14,8 @@ export default function useMousePosition() {
             });
         }
         document.addEventListener('mousemove', onMouseUpdate, false);
-        document.addEventListener('mouseenter', onMouseUpdate, false);
         return () => {
             document.removeEventListener("mousemove", onMouseUpdate);
-            document.removeEventListener("mouseenter", onMouseUpdate);
         }
     }, []);
     return mousePosition;

@@ -8,27 +8,24 @@ import { useGlobalStateContext } from "../../context/appContext"
 
 const ProjectImageTwoColumns = ({ detail }) => {
   const cref = useRef(null);
-  const { layoutRendered } = useGlobalStateContext();
 
   useEffect(() => {
-    if (layoutRendered) {
-      const q = gsap.utils.selector(cref),
-        uncover = gsap.timeline({ paused: true });
-      gsap.set(q(`.${styles.columnRight}`), { y: 100 })
-      uncover.add('start')
-        .fromTo(q(`.${styles.columnRight}`), { y: 100 }, { y: -200 }, 'start')
-        .fromTo(q(`.${styles.columnLeft}`), { y: -100 }, { y: 200 }, 'start')
+    const q = gsap.utils.selector(cref),
+      uncover = gsap.timeline({ paused: true });
+    gsap.set(q(`.${styles.columnRight}`), { y: 100 })
+    uncover.add('start')
+      .fromTo(q(`.${styles.columnRight}`), { y: 100 }, { y: -200 }, 'start')
+      .fromTo(q(`.${styles.columnLeft}`), { y: -100 }, { y: 200 }, 'start')
 
-      ScrollTrigger.create({
-        trigger: cref,
-        start: 'top bottom',
-        end: 'bottom top',
-        animation: uncover,
-        scrub: true
-      });
-    }
+    ScrollTrigger.create({
+      trigger: cref,
+      start: 'top bottom',
+      end: 'bottom top',
+      animation: uncover,
+      scrub: true
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [layoutRendered]);
+  }, []);
 
   return (
     <section ref={el => cref = el}>

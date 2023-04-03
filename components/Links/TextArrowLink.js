@@ -1,14 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link"
 import { gsap, Power3 } from "gsap"
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
 import { useGlobalStateContext, useGlobalDispatchContext } from "../../context/appContext"
 import styles from "./TextArrowLink.module.scss"
 
 const TextArrowLink = ({ url, title }) => {
     const cref = useRef(null);
     const tl = useRef(null);
-    const { layoutRendered } = useGlobalStateContext();
     const dispatch = useGlobalDispatchContext();
     const { cursorStyles } = useGlobalStateContext();
 

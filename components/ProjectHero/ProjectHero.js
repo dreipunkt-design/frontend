@@ -5,22 +5,47 @@ import styles from './ProjectHero.module.scss'
 import { useGlobalStateContext, useGlobalDispatchContext } from "../../context/appContext"
 import { getMediaURL } from "../../lib/api"
 
-const transition = { duration: .6, ease: [0.6, 0.01, -0.05, 0.9] };
+let transition = { duration: .6, ease: [0.6, 0.01, -0.05, 0.9] };
 
 const ProjectHero = ({ image, imagePhone }) => {
   const cref = useRef(null);
-  const { layoutRendered } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
   const { thumbPosition } = useGlobalStateContext();
   const [maskFinished, setMaskFinished] = useState(false);
   const [imgFinished, setImgFinished] = useState(false);
+
+  let mask_initial = {
+    top: window.innerHeight / 2,
+    left: 0,
+    height: window.innerHeight / 2,
+    width: '100%'
+  }
+  let img_initial = {
+    top: -window.innerHeight / 2,
+    left: null,
+    height: null,
+    width: null
+  }
+
+  if (thumbPosition)
+    if (typeof thumbPosition.redirect === 'undefined') {
+      mask_initial = {
+        top: thumbPosition.mask_rect.top,
+        left: thumbPosition.mask_rect.left,
+        height: thumbPosition.mask_rect.height,
+        width: thumbPosition.mask_rect.width
+      }
+      img_initial = {
+        top: thumbPosition.img_rect.top - thumbPosition.mask_rect.top,
+        left: thumbPosition.img_rect.left - thumbPosition.mask_rect.left,
+        height: thumbPosition.img_rect.height,
+        width: thumbPosition.img_rect.width
+      }
+    }
+
+
   const variants_mask = {
-    initial: {
-      top: thumbPosition ? thumbPosition.mask_rect.top : window.innerHeight / 2,
-      left: thumbPosition ? thumbPosition.mask_rect.left : 0,
-      height: thumbPosition ? thumbPosition.mask_rect.height : window.innerHeight / 2,
-      width: thumbPosition ? thumbPosition.mask_rect.width : '100%'
-    },
+    initial: mask_initial,
     animate: {
       top: null,
       left: null,
@@ -40,12 +65,7 @@ const ProjectHero = ({ image, imagePhone }) => {
     }
   };
   const variants_img = {
-    initial: {
-      top: thumbPosition ? thumbPosition.img_rect.top - thumbPosition.mask_rect.top : -window.innerHeight / 2,
-      left: thumbPosition ? thumbPosition.img_rect.left - thumbPosition.mask_rect.left : null,
-      height: thumbPosition ? thumbPosition.img_rect.height : null,
-      width: thumbPosition ? thumbPosition.img_rect.width : null
-    },
+    initial: img_initial,
     animate: {
       top: null,
       left: null,
@@ -86,55 +106,69 @@ const ProjectHero = ({ image, imagePhone }) => {
   });
 
   useEffect(() => {
-    if (layoutRendered) {
-      // Logofarbe weiß/schwarz
-      ScrollTrigger.create({
-        trigger: cref,
-        start: "top 10%",
-        end: "bottom 10%",
-        onEnter: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true }),
-        onEnterBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true }),
-        onLeave: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false }),
-        onLeaveBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false })
-      });
-    }
+    ScrollTrigger.create({
+      trigger: cref,
+      start: "top 10%",
+      end: "bottom 10%",
+      onEnter: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true }),
+      onEnterBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true }),
+      onLeave: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false }),
+      onLeaveBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false })
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [layoutRendered]);
+  }, []);
 
   return (
     <header className={styles.heroContainer} ref={el => cref = el}>
       <div className={styles.hero}>
         <div className="hero-inner">
           <section>
-            <motion.div className={styles.heroImageWrap}
-              initial="initial"
-              animate={maskFinished ? "set" : "animate"}
-              exit="exit"
-              variants={variants_mask}
-              onAnimationComplete={() => {
-                setMaskFinished(true);
-              }}
-            >
-              <picture>
-                {sources.map((source) => {
-                  if (source.minWidth == 250)
-                    return (
-                      <motion.img key={`image-${image.id}`} src={source.srcSet} alt={image.alternativeText}
-                        initial="initial"
-                        animate={imgFinished ? "set" : "animate"}
-                        variants={variants_img}
-                        onAnimationComplete={() => {
-                          setImgFinished(true);
-                        }}
-                      />
-                    );
-                  else
-                    return (
-                      <source key={`source-${image.id}-${source.minWidth}`} media={`(min-width: ${source.minWidth}px)`} srcSet={source.srcSet} />
-                    )
-                })}
-              </picture>
-            </motion.div>
+            {(thumbPosition && (typeof thumbPosition.redirect !== 'undefined')) ?
+              <div className={styles.heroImageWrap}>
+                <picture>
+                  {sources.map((source) => {
+                    if (source.minWidth == 250)
+                      return (
+                        <img key={`image-${image.id}`} src={source.srcSet} alt={image.alternativeText} />
+                      );
+                    else
+                      return (
+                        <source key={`source-${image.id}-${source.minWidth}`} media={`(min-width: ${source.minWidth}px)`} srcSet={source.srcSet} />
+                      )
+                  })}
+                </picture>
+              </div>
+              :
+              <motion.div className={styles.heroImageWrap}
+                initial="initial"
+                animate={maskFinished ? "set" : "animate"}
+                exit="exit"
+                variants={variants_mask}
+                onAnimationComplete={() => {
+                  setMaskFinished(true);
+                }}
+              >
+                <picture>
+                  {sources.map((source) => {
+                    if (source.minWidth == 250)
+                      return (
+                        <motion.img key={`image-${image.id}`} src={source.srcSet} alt={image.alternativeText}
+                          initial="initial"
+                          animate={imgFinished ? "set" : "animate"}
+                          variants={variants_img}
+                          onAnimationComplete={() => {
+                            setImgFinished(true);
+                          }}
+                        />
+                      );
+                    else
+                      return (
+                        <source key={`source-${image.id}-${source.minWidth}`} media={`(min-width: ${source.minWidth}px)`} srcSet={source.srcSet} />
+                      )
+                  })}
+                </picture>
+              </motion.div>
+            }
           </section>
         </div>
       </div>

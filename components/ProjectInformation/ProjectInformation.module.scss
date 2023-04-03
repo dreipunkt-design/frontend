@@ -34,6 +34,7 @@
     }
 
     h1 {
+      user-select: none;
       @extend %fontSubStatement;
       text-transform: uppercase;
     }
@@ -100,6 +101,7 @@
         align-self: flex-end;
         display: flex;
         flex-wrap: wrap;
+        user-select: none;
 
         @include media("<=smallDesktop") {
           margin-bottom: 50px;
@@ -129,6 +131,7 @@
       }
 
       .description {
+        user-select: none;
         max-width: 970px;
       }
     }

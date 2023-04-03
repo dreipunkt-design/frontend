@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useLayoutEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link"
 import { gsap, Power3 } from "gsap"
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
@@ -27,7 +27,6 @@ const ProjectThumb = ({ project, previewPrev, previewNext }) => {
   const imageData = project.attributes.mainimage.data;
   const cref = useRef(null);
   const tl = useRef(null);
-  const { layoutRendered } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
   const { cursorStyles } = useGlobalStateContext();
   const [clicked, setClicked] = useState(false);
@@ -100,36 +99,34 @@ const ProjectThumb = ({ project, previewPrev, previewNext }) => {
   }
 
   useEffect(() => {
-    if (layoutRendered) {
-      const q = gsap.utils.selector(cref);
-      tl.current = gsap.timeline({ paused: true });
-      tl.current.from(q(`.${styles.projectThumb}`), 1, { y: 300, autoAlpha: 0, ease: Power3.easeOut }, 0.1)
-        .from(q(`.${styles.info}`), 1, { y: 30, autoAlpha: 0, ease: Power3.easeOut });
-      ScrollTrigger.create({
-        trigger: cref,
-        animation: tl.current,
-        start: "30% 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none none"
-      });
-      const uncover = gsap.timeline({ paused: true })
-      if (project.attributes.format === 'hoch' && typeof previewPrev === 'undefined' && typeof previewNext === 'undefined') {
-        gsap.set(q('img'), { width: '240%', xPercent: -(240 / 8) })
-        gsap.set(q('img'), { yPercent: -20 })
-      }
-      else
-        gsap.set(q('img'), { yPercent: -20 })
-      uncover.to(q('img'), { yPercent: 10, ease: 'none' });
-      ScrollTrigger.create({
-        trigger: cref,
-        start: 'center bottom',
-        end: '+=100%',
-        animation: uncover,
-        scrub: true
-      });
+    const q = gsap.utils.selector(cref);
+    tl.current = gsap.timeline({ paused: true });
+    tl.current.from(q(`.${styles.projectThumb}`), 1, { y: 300, autoAlpha: 0, ease: Power3.easeOut }, 0.1)
+      .from(q(`.${styles.info}`), 1, { y: 30, autoAlpha: 0, ease: Power3.easeOut });
+    ScrollTrigger.create({
+      trigger: cref,
+      animation: tl.current,
+      start: "30% 80%",
+      end: "bottom 20%",
+      toggleActions: "play none none none"
+    });
+    const uncover = gsap.timeline({ paused: true })
+    if (project.attributes.format === 'hoch' && typeof previewPrev === 'undefined' && typeof previewNext === 'undefined') {
+      gsap.set(q('img'), { width: '240%', xPercent: -(240 / 8) })
+      gsap.set(q('img'), { yPercent: -20 })
     }
+    else
+      gsap.set(q('img'), { yPercent: -20 })
+    uncover.to(q('img'), { yPercent: 10, ease: 'none' });
+    ScrollTrigger.create({
+      trigger: cref,
+      start: 'center bottom',
+      end: '+=100%',
+      animation: uncover,
+      scrub: true
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [layoutRendered]);
+  }, []);
 
   return (
 

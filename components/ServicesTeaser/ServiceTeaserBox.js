@@ -13,7 +13,6 @@ const ServiceTeaserBox = ({ service, videoRight }) => {
     const cref = useRef(null);
     const dispatch = useGlobalDispatchContext();
     const { cursorStyles } = useGlobalStateContext();
-    const { layoutRendered } = useGlobalStateContext();
     const windowSize = useWindowSize();
 
     const onCursor = cursorType => {
@@ -22,24 +21,22 @@ const ServiceTeaserBox = ({ service, videoRight }) => {
     }
 
     useEffect(() => {
-        if (layoutRendered) {
-            if (windowSize.width > process.env.breakpoints.tablet) {
-                const q = gsap.utils.selector(cref);
-                const containerText = q(`.${styles.containerText}`);
-                const tl = gsap.timeline({ paused: true });
-                tl.from(containerText, { y: 200, ease: 'none', duration: 1 })
-                    .to(containerText, { y: -200, ease: 'none', duration: 1 });
-                ScrollTrigger.create({
-                    trigger: cref,
-                    start: 'top bottom', // top => trigger bottom => viewport 
-                    end: 'bottom top', // top => trigger top => viewport 
-                    animation: tl,
-                    scrub: true
-                });
-            }
+        if (windowSize.width > process.env.breakpoints.tablet) {
+            const q = gsap.utils.selector(cref);
+            const containerText = q(`.${styles.containerText}`);
+            const tl = gsap.timeline({ paused: true });
+            tl.from(containerText, { y: 200, ease: 'none', duration: 1 })
+                .to(containerText, { y: -200, ease: 'none', duration: 1 });
+            ScrollTrigger.create({
+                trigger: cref,
+                start: 'top bottom', // top => trigger bottom => viewport 
+                end: 'bottom top', // top => trigger top => viewport 
+                animation: tl,
+                scrub: true
+            });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [layoutRendered]);
+    }, []);
 
     return (
         <div ref={el => cref = el} className={`${styles.containerService} ${(!videoRight) ? styles.videoLeft : ''}`} >
@@ -74,7 +71,7 @@ const ServiceTeaserBox = ({ service, videoRight }) => {
                                     {/*<span className={styles.informationLinkLabel}>{service.link_label}</span>*/}
                                     <span className={styles.informationLinkArrow}>
                                         <span className={styles.informationLinkArrowMask}>
-                                            <img src="images/arrow-right.svg" alt={service.link_label} />
+                                            <img src="../images/arrow-right.svg" alt={service.link_label} />
                                         </span>
                                     </span>
                                 </a>

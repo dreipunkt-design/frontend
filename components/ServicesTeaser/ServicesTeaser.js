@@ -7,34 +7,31 @@ import { useGlobalStateContext, useGlobalDispatchContext } from "../../context/a
 
 const ServicesTeaser = ({ services }) => {
   const cref = useRef(null);
-  const { layoutRendered } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
 
   useEffect(() => {
-    if (layoutRendered) {
-      ScrollTrigger.create({
-        trigger: cref,
-        end: "bottom 10%",
-        onEnterBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true })
-      });
-      const q = gsap.utils.selector(cref);
-      const containerTrigger = q(`.${styles.servicesTeaserContainer}`);
-      const qm = gsap.utils.selector('.layout-container');
-      const container = qm('.layout-main');
-      const tl = gsap.timeline({ paused: true });
-      tl.to(container, { backgroundColor: '#000000', ease: 'none' });
-      ScrollTrigger.create({
-        trigger: containerTrigger,
-        start: 'top bottom', // top => trigger bottom => viewport 
-        end: 'top 70%', // top => trigger top => viewport 
-        animation: tl,
-        scrub: true,
-        onEnter: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true }),
-        onLeaveBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false })
-      });
-    }
+    ScrollTrigger.create({
+      trigger: cref,
+      end: "bottom 10%",
+      onEnterBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true })
+    });
+    const q = gsap.utils.selector(cref);
+    const containerTrigger = q(`.${styles.servicesTeaserContainer}`);
+    const qm = gsap.utils.selector('.layout-container');
+    const container = qm('.layout-main');
+    const tl = gsap.timeline({ paused: true });
+    tl.to(container, { backgroundColor: '#000000', ease: 'none' });
+    ScrollTrigger.create({
+      trigger: containerTrigger,
+      start: 'top bottom', // top => trigger bottom => viewport 
+      end: 'top 70%', // top => trigger top => viewport 
+      animation: tl,
+      scrub: true,
+      onEnter: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true }),
+      onLeaveBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false })
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [layoutRendered]);
+  }, []);
 
   return (
     <section ref={el => cref = el}>

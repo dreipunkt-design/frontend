@@ -45,6 +45,7 @@
         width: 50%;
         display: flex;
         align-items: center;
+        user-select: none;
 
         @include media("<=tablet") {
             width: 100%;
@@ -78,6 +79,7 @@
             }
 
             .title {
+                user-select: none;
                 @extend %fontTitleSmall;
                 margin-bottom: 20px;
                 width: 100%;
@@ -89,6 +91,7 @@
             }
 
             .service {
+                user-select: none;
                 @extend %fontTitleLarge;
                 margin-bottom: 20px;
                 color: $lightGray;
@@ -96,6 +99,7 @@
             }
 
             .text {
+                user-select: none;
                 margin-bottom: 40px;
                 color: $lightGray;
                 width: 100%;

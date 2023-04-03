@@ -10,6 +10,12 @@ Die Anweisung
 ScrollTrigger.getAll().forEach(t => t.kill());
 löscht alle ScrollTrigger. Eventuell müssen die Timelines
 auch gelöscht werden. Prüfen!
+Ein weitere Lösungsansatz ist es mit dem gsap context zu arbeiten. 
+Dieser räumt nach dem Remove der Komponente auf.
+
+* Animationen laufen nicht immer. Eventuell könnte ein ScrollTrigger refresh helfen!
+# Erledigt! 
+# Im Layout ResizeOberver eingebaut. Bei jeder resize des LayoutContainerss wird die Funktion ScrollTrigger.refresh() aufgerufen.
 
 * Transition Project-Detail => Home
 Ist die Project-Detail-Seite nicht an der Position Top, dann

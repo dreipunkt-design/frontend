@@ -12,45 +12,42 @@ const transition_opacity = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 const Hero = ({ url, title, text }) => {
   const cref = useRef(null);
   const textRef = useRef(null);
-  const { layoutRendered } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
 
   useEffect(() => {
-    if (layoutRendered) {
-      // Logofarbe weiß/schwarz
-      const q = gsap.utils.selector(cref);
-      ScrollTrigger.create({
-        trigger: cref,
-        start: "top 10%",
-        end: "bottom 10%",
-        onEnter: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true }),
-        onEnterBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true }),
-        onLeave: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false }),
-        onLeaveBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false })
-      });
-      // Text ausblenden
-      const text = gsap.timeline({ paused: true })
-      text.to(textRef, { y: 100, ease: 'none', opacity: 0 });
-      ScrollTrigger.create({
-        trigger: cref,
-        start: "bottom 90%",
-        end: "bottom 60%",
-        scrub: true,
-        animation: text
-      });
-      // Scroll-Animation Image-Mask (Bild innerhalb der Maske bewegen)
-      const uncover = gsap.timeline({ paused: true })
-      uncover.to(q('video'), { yPercent: 100, ease: 'none' });
-      ScrollTrigger.create({
-        trigger: cref,
-        start: 'bottom bottom',
-        end: '+=200%',
-        animation: uncover,
-        scrub: true
-      });
-    }
+    // Logofarbe weiß/schwarz
+    const q = gsap.utils.selector(cref);
+    ScrollTrigger.create({
+      trigger: cref,
+      start: "top 10%",
+      end: "bottom 10%",
+      onEnter: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true }),
+      onEnterBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: true }),
+      onLeave: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false }),
+      onLeaveBack: () => dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false })
+    });
+    // Text ausblenden
+    const text = gsap.timeline({ paused: true })
+    text.to(textRef, { y: 100, ease: 'none', opacity: 0 });
+    ScrollTrigger.create({
+      trigger: cref,
+      start: "bottom 90%",
+      end: "bottom 60%",
+      scrub: true,
+      animation: text
+    });
+    // Scroll-Animation Image-Mask (Bild innerhalb der Maske bewegen)
+    const uncover = gsap.timeline({ paused: true })
+    uncover.to(q('video'), { yPercent: 100, ease: 'none' });
+    ScrollTrigger.create({
+      trigger: cref,
+      start: 'bottom bottom',
+      end: '+=200%',
+      animation: uncover,
+      scrub: true
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [layoutRendered]);
+  }, []);
 
   return (
     <header ref={el => cref = el}>

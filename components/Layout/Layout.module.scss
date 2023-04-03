@@ -9,7 +9,10 @@
         position: relative;
         z-index: 1;
         background-color: $bgColor;
-        padding-bottom: 150px;
+
+        &.renderFooter {
+            padding-bottom: 150px;
+        }
     }
 
     .layoutFooterSpacer {

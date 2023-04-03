@@ -15,11 +15,13 @@
     overflow: hidden;
 
     .title {
+      user-select: none;
       @extend %fontTitleSmall;
       margin-bottom: 50px;
     }
 
     .information {
+      user-select: none;
       width: 100%;
       @extend %fontSubStatement;
       text-align: center;

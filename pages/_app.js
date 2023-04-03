@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import Router from "next/router";
 import { gsap } from "gsap"
 import { AnimatePresence } from "framer-motion";
@@ -39,10 +39,11 @@ function App({ Component, pageProps, router }) {
   });
 
   useEffect(() => {
+    const layoutContainer = document.querySelector('.layout-container');
+    if (layoutContainer) console.log('_app -> useEffect [] ' + layoutContainer.getBoundingClientRect().height);
     router.push(router.asPath); // damit fix auch beim ersten laden funktioniert
     console.log("%c©2022 dreipunkt", "color: #008876; font-size: 21px");
     console.log('isMobile: ', isMobile);
-
     gsap.to("body", { visibility: "visible" });
     if (document.readyState == "complete") {
       gsap.to("body", { visibility: "visible" });

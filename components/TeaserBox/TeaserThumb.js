@@ -31,7 +31,6 @@ const TeaserThumb = ({ project, column }) => {
   const imageHeightPercent = (imageData.attributes.height / imageData.attributes.width * (typeof column !== 'undefined' ? (column === 'single' ? 100 : 180) : 180));
   const imageHeight = imageHeightPercent * 0.9; // abzgl.10% für Animation
   const [reveal, setReveal] = useState('');
-  const { layoutRendered } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
   const { cursorStyles } = useGlobalStateContext();
   const [clicked, setClicked] = useState(false);
@@ -42,48 +41,46 @@ const TeaserThumb = ({ project, column }) => {
   }
 
   useEffect(() => {
-    if (layoutRendered) {
-      const q = gsap.utils.selector(cref);
-      // Anfangsanimation - maske nach oben aufschieben
-      tl.current = gsap.timeline({ paused: true });
-      tl.current.from(q(`.${styles.teaserThumb}`), 1, { y: 300, ease: Power3.easeOut }, 0.1)
-        .from(q(`.${styles.info}`), 1, { y: 30, opacity: 0, ease: Power3.easeOut });
+    const q = gsap.utils.selector(cref);
+    // Anfangsanimation - maske nach oben aufschieben
+    tl.current = gsap.timeline({ paused: true });
+    tl.current.from(q(`.${styles.teaserThumb}`), 1, { y: 300, ease: Power3.easeOut }, 0.1)
+      .from(q(`.${styles.info}`), 1, { y: 30, opacity: 0, ease: Power3.easeOut });
+    ScrollTrigger.create({
+      trigger: cref,
+      animation: tl.current,
+      start: "top 80%",
+      end: "bottom 20%",
+      toggleActions: "play none none none",
+      onEnter: () => {
+        setReveal(styles.isReveal);
+      }
+    });
+    // Scroll-Animation Image-Mask (Bild innerhalb der Maske bewegen)
+    const uncover = gsap.timeline({ paused: true })
+    gsap.set(q('img'), { yPercent: -20 })
+    uncover.to(q('img'), { yPercent: 10, ease: 'none' });
+    ScrollTrigger.create({
+      trigger: cref,
+      start: 'top bottom',
+      end: '+=200%',
+      animation: uncover,
+      scrub: true
+    });
+    // Scroll-Animation linke Spalte
+    if (column === 'left') {
+      const move = gsap.timeline({ paused: true })
+      gsap.set(cref, { y: -200 })
+      move.to(cref, { y: 200, ease: 'none' });
       ScrollTrigger.create({
         trigger: cref,
-        animation: tl.current,
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none none",
-        onEnter: () => {
-          setReveal(styles.isReveal);
-        }
-      });
-      // Scroll-Animation Image-Mask (Bild innerhalb der Maske bewegen)
-      const uncover = gsap.timeline({ paused: true })
-      gsap.set(q('img'), { yPercent: -20 })
-      uncover.to(q('img'), { yPercent: 10, ease: 'none' });
-      ScrollTrigger.create({
-        trigger: cref,
-        start: 'top bottom',
-        end: '+=200%',
-        animation: uncover,
+        start: 'center bottom',
+        animation: move,
         scrub: true
       });
-      // Scroll-Animation linke Spalte
-      if (column === 'left') {
-        const move = gsap.timeline({ paused: true })
-        gsap.set(cref, { y: -200 })
-        move.to(cref, { y: 200, ease: 'none' });
-        ScrollTrigger.create({
-          trigger: cref,
-          start: 'center bottom',
-          animation: move,
-          scrub: true
-        });
-      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [layoutRendered]);
+  }, []);
 
   return (
 

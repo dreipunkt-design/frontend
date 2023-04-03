@@ -10,33 +10,31 @@ import { getMediaURL } from "../../lib/api"
 const ProjectImageSingleColumn = ({ detail }) => {
   const cref = useRef(null);
   const tl = useRef(null);
-  const { layoutRendered } = useGlobalStateContext();
+
   useEffect(() => {
-    if (layoutRendered) {
-      const q = gsap.utils.selector(cref);
-      const images = gsap.utils.toArray(q(`.${styles.imageContainer}`));
-      images.forEach((element, i) => {
-        tl.current = gsap.timeline({ paused: true });
-        gsap.set(element, { scale: .95 })
-        tl.current.from(element, .6, { y: 100, opacity: 0, ease: Power3.easeOut })
-        ScrollTrigger.create({
-          animation: tl.current,
-          trigger: element,
-          start: "top 80%",
-          toggleActions: "play none none none"
-        });
-        const uncover = gsap.timeline({ paused: true })
-        uncover.to(element, { scale: 1, ease: 'none' });
-        ScrollTrigger.create({
-          trigger: element,
-          start: 'top bottom',
-          end: '+=100%',
-          animation: uncover,
-          scrub: true
-        });
+    const q = gsap.utils.selector(cref);
+    const images = gsap.utils.toArray(q(`.${styles.imageContainer}`));
+    images.forEach((element, i) => {
+      tl.current = gsap.timeline({ paused: true });
+      gsap.set(element, { scale: .95 })
+      tl.current.from(element, .6, { y: 100, opacity: 0, ease: Power3.easeOut })
+      ScrollTrigger.create({
+        animation: tl.current,
+        trigger: element,
+        start: "top 80%",
+        toggleActions: "play none none none"
       });
-    }
-  }, [layoutRendered]);
+      const uncover = gsap.timeline({ paused: true })
+      uncover.to(element, { scale: 1, ease: 'none' });
+      ScrollTrigger.create({
+        trigger: element,
+        start: 'top bottom',
+        end: '+=100%',
+        animation: uncover,
+        scrub: true
+      });
+    });
+  }, []);
 
   return (
     <section ref={el => cref = el}>

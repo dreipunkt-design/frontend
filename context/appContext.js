@@ -19,24 +19,18 @@ const globalReducer = (state, action) => {
                 menuOpen: action.menuOpen,
             }
         }
+        case "SCROLLBAR_DISABLED_TYPE": {
+            return {
+                ...state,
+                scrollbarDisabled: action.scrollbarDisabled,
+            }
+        }
         case "CURSOR_TYPE": {
             return {
                 ...state,
                 cursorType: action.cursorType,
                 cursorImage: action.image,
                 cursorCaption: action.caption
-            }
-        }
-        case "PAGE_RENDERED_TYPE": {
-            return {
-                ...state,
-                pageRendered: action.pageRendered,
-            }
-        }
-        case "LAYOUT_RENDERED_TYPE": {
-            return {
-                ...state,
-                layoutRendered: action.layoutRendered,
             }
         }
         case "THUMB_POSITION_TYPE": {
@@ -55,9 +49,8 @@ const globalReducer = (state, action) => {
 export const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(globalReducer, {
         menuOpen: false,
+        scrollbarDisabled: false,
         darkNavigation: true,
-        layoutRendered: false,
-        pageRendered: false,
         cursorType: false,
         cursorImage: false,
         cursorCaption: false,

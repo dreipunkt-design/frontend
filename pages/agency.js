@@ -13,26 +13,6 @@ import ClientsBox from "../components/ClientsBox";
 
 export default function Profile({ page }) {
     const dispatch = useGlobalDispatchContext();
-    const [isPresent, safeToRemove] = usePresence();
-
-    console.log(page);
-
-    useEffect(() => {
-        if (!isPresent) {
-            // Context zurücksetzen für neue Seite
-            dispatch({ type: "PAGE_RENDERED_TYPE", pageRendered: false });
-            dispatch({ type: "LAYOUT_RENDERED_TYPE", layoutRendered: false });
-            safeToRemove();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isPresent])
-
-    useEffect(() => {
-        // Page gerendert -> Layout init (scroller, anim) -> Components init (anim)
-        dispatch({ type: "PAGE_RENDERED_TYPE", pageRendered: true });
-        dispatch({ type: 'NAVIGATION_TYPE', darkNavigation: false });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     return (
         <>

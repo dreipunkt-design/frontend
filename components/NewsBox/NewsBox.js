@@ -7,7 +7,6 @@ import { useGlobalStateContext, useGlobalDispatchContext } from "../../context/a
 
 const NewsBox = ({ news }) => {
   const cref = useRef(null);
-  const { layoutRendered } = useGlobalStateContext();
   const { cursorStyles } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
   let lastImage = null;
@@ -40,30 +39,28 @@ const NewsBox = ({ news }) => {
   }
 
   useEffect(() => {
-    if (layoutRendered) {
-      const q = gsap.utils.selector(cref);
-      const qm = gsap.utils.selector('.layout-container');
-      const container = qm('.layout-main');
-      // Farbe Header
-      ScrollTrigger.create({
-        trigger: cref,
-        start: 'top 50%',
-        onEnter: () => gsap.set(container, { backgroundColor: '#e6e6e4' }),
-        onLeaveBack: () => gsap.set(container, { backgroundColor: '#000000' })
-      });
-      // Reveal Animation
-      const tl = gsap.timeline({ paused: true });
-      tl.from(q(`.${styles.titleContainer}`), { y: 20, opacity: 0, duration: .5, ease: Power3.easeOut })
-        .from(q(`.${styles.newsContainer}`), { y: 20, opacity: 0, duration: .5, stagger: .5, ease: Power3.easeOut }, .5);
-      ScrollTrigger.create({
-        trigger: cref,
-        animation: tl,
-        start: "top 50%",
-        toggleActions: "play none none none"
-      });
-    }
+    const q = gsap.utils.selector(cref);
+    const qm = gsap.utils.selector('.layout-container');
+    const container = qm('.layout-main');
+    // Farbe Header
+    ScrollTrigger.create({
+      trigger: cref,
+      start: 'top 50%',
+      onEnter: () => gsap.set(container, { backgroundColor: '#e6e6e4' }),
+      onLeaveBack: () => gsap.set(container, { backgroundColor: '#000000' })
+    });
+    // Reveal Animation
+    const tl = gsap.timeline({ paused: true });
+    tl.from(q(`.${styles.titleContainer}`), { y: 20, opacity: 0, duration: .5, ease: Power3.easeOut })
+      .from(q(`.${styles.newsContainer}`), { y: 20, opacity: 0, duration: .5, stagger: .5, ease: Power3.easeOut }, .5);
+    ScrollTrigger.create({
+      trigger: cref,
+      animation: tl,
+      start: "top 50%",
+      toggleActions: "play none none none"
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [layoutRendered]);
+  }, []);
 
   return (
     <>

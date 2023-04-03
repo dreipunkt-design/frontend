@@ -45,11 +45,13 @@
         color: $white;
         margin-bottom: 15px;
         display: flex;
+        user-select: none;
 
         .line {
           display: block;
           height: 1px;
           width: 100px;
+          user-select: none;
           background-color: $white !important;
           //border-radius: 3px;
           transform: translateY(12px);
@@ -58,6 +60,7 @@
       }
 
       h3 {
+        user-select: none;
         @extend %fontMainStatement;
 
         @include media("<=tablet") {

@@ -1,12 +1,11 @@
 import TeaserThumb from "./TeaserThumb"
 
-const TeasersColumn = ({ projects, teasers, column }) => {
+const TeasersColumn = ({ teasers, column }) => {
   return (
     <>
       {teasers && teasers.map((teaser) => {
-        let found = projects.find(project => project.attributes.slug === teaser.project_slug);
         return (
-          <TeaserThumb key={found.id} project={found} column={column} />
+          <TeaserThumb key={teaser.id} project={teaser.project.data} column={column} />
         )
       })}
     </>

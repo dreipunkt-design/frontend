@@ -64,9 +64,8 @@
 
               .contact {
                 .address {
+                  user-select: none;
                   margin-bottom: 20px;
-
-
                 }
 
                 a {
@@ -99,6 +98,7 @@
           font-size: 0.6rem;
           letter-spacing: 0.1rem;
           color: $darkGray;
+          user-select: none;
         }
 
         .separator {

@@ -8,23 +8,20 @@ import { useGlobalStateContext } from "../../context/appContext"
 const ProjectInformationBox = ({ detail }) => {
     const cref = useRef(null);
     const tl = useRef(null);
-    const { layoutRendered } = useGlobalStateContext();
 
     useEffect(() => {
-        if (layoutRendered) {
-            const q = gsap.utils.selector(cref);
-            tl.current = gsap.timeline({ paused: true });
-            tl.current.from(q(`.${styles.informationBoxBoxContainer}>h1`), .6, { y: 20, opacity: 0, ease: Power3.easeOut })
-                .from(q(`.${styles.information}`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .5);
-            ScrollTrigger.create({
-                trigger: cref,
-                animation: tl.current,
-                start: "top 50%",
-                end: "bottom 20%",
-                toggleActions: "play none none none"
-            })
-        }
-    }, [layoutRendered]);
+        const q = gsap.utils.selector(cref);
+        tl.current = gsap.timeline({ paused: true });
+        tl.current.from(q(`.${styles.informationBoxBoxContainer}>h1`), .6, { y: 20, opacity: 0, ease: Power3.easeOut })
+            .from(q(`.${styles.information}`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .5);
+        ScrollTrigger.create({
+            trigger: cref,
+            animation: tl.current,
+            start: "top 50%",
+            end: "bottom 20%",
+            toggleActions: "play none none none"
+        });
+    }, []);
 
     return (
         <section ref={el => cref = el}>

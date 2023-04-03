@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from "framer-motion";
-import { gsap, Power3 } from "gsap"
+import { gsap, Power3, Power2 } from "gsap"
 import styles from './Cursor.module.scss'
 import { useGlobalStateContext } from "../../context/appContext"
 import useMousePosition from "../../hooks/useMousePosition"
@@ -16,7 +16,6 @@ const Cursor = ({ hamburgerPosition }) => {
     const [cursorPos, setCursorPos] = useState('');
     const [cursorIcon, setCursorIcon] = useState(false);
     const cref = useRef(null);
-    const cursorTypeOld = null;
 
     const iconProject = "../images/plus.svg";
     const iconProjectNext = "../images/arrow-to-project-right.svg";
@@ -42,14 +41,19 @@ const Cursor = ({ hamburgerPosition }) => {
             const left = vw * .4 * mousePosition.x / vw;
             const tmImageContainer = gsap.timeline({ paused: true }),
                 q = gsap.utils.selector(cref);
-            tmImageContainer.to(q(`.${styles.imageContainer}`), 1, { top: mousePosition.y, left: left, ease: Power3.easeOut });
+            tmImageContainer.to(q(`.${styles.imageContainer}`), 1, { top: mousePosition.y, left: left, ease: Power2.easeOut });
             tmImageContainer.play();
         }
     };
 
-    function setNewsMode() {
-        newCursorClass = styles.news;
-    };
+    useEffect(() => {
+        if (cursorPos.left && cursorPos.top) {
+            const q = gsap.utils.selector(cref),
+                tm = gsap.timeline({ paused: true });
+            tm.to(q(`.${styles.cursor}`), 1, { autoAlpha: 1, left: cursorPos.left, top: cursorPos.top, ease: Power3.easeOut });
+            tm.play();
+        }
+    }, [cursorPos]);
 
     useEffect(() => {
         let newCursorClass = '',
@@ -70,7 +74,6 @@ const Cursor = ({ hamburgerPosition }) => {
         if (cursorType === 'projectNext') newCursorIcon = iconProjectNext;
         setCursorClass(newCursorClass);
         setCursorIcon(newCursorIcon);
-        setPosition();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cursorType]);
 
@@ -79,10 +82,12 @@ const Cursor = ({ hamburgerPosition }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mousePosition]);
 
+    //style={{ left: cursorPos.left, top: cursorPos.top }}
+
     return (
         <>
             <div className={`cursor-container`} ref={el => cref = el} >
-                <div className={`cursor-main ${styles.cursor} ${cursorClass}`} style={{ left: cursorPos.left, top: cursorPos.top }}>
+                <div className={`cursor-main ${styles.cursor} ${cursorClass}`} >
                     {cursorIcon ?
                         <img src={cursorIcon} alt="ZUM PROJEKT" />
                         : ""}

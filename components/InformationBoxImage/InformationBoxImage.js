@@ -13,11 +13,9 @@ const transition_opacity = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 const InformationBoxImage = ({ boxdata }) => {
   const cref = useRef(null);
   const tl = useRef(null);
-  const { layoutRendered } = useGlobalStateContext();
 
   /*
   useEffect(() => {
-    if (layoutRendered) {
       const q = gsap.utils.selector(cref);
       gsap.to(q(`.${styles.informationBoxImageContainer}`), {
         ease: Power3.easeOut,
@@ -32,8 +30,8 @@ const InformationBoxImage = ({ boxdata }) => {
           toggleActions: "play none none none"
         }
       });
-    }
-  }, [layoutRendered]);
+    
+  }, []);
 */
 
   return (

@@ -1,33 +1,36 @@
-import { useEffect } from "react"
-
+import { useEffect, useLayoutEffect, useRef } from "react"
 import { isMobile } from 'react-device-detect'
 import Scrollbar from "smooth-scrollbar"
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
-import { gsap } from "gsap";
 import Footer from "../Footer/Footer"
 import styles from "./Layout.module.scss"
-import { useGlobalStateContext, useGlobalDispatchContext } from "../../context/appContext";
 
 let bodyScrollBar = null;
 
-const Layout = ({ children }) => {
-  const dispatch = useGlobalDispatchContext();
-  const { pageRendered } = useGlobalStateContext();
-  const { menuOpen } = useGlobalStateContext();
+const Layout = ({ children, withOutFooter }) => {
+  const renderFooter = (typeof withOutFooter === 'undefined') ? true : false;
 
-  useEffect(() => {
-    if (bodyScrollBar && !isMobile)
-      bodyScrollBar.updatePluginOptions('edgeEasing', { disbabled: menuOpen });
-  }, [menuOpen]);
-
-  useEffect(() => {
-    if (pageRendered) {
-      // Kill all Scrolltriggers
+  useLayoutEffect(() => {
+    const scroller = document.querySelector('.scroller'),
+      layoutContainer = document.querySelector('.layout-container');
+    if (scroller) {
+      // Kill all Scrolltriggers & Scrollbars
       ScrollTrigger.getAll().forEach(t => t.kill());
+      // Destroy Scrollbar
+      if (Scrollbar.getAll().length) Scrollbar.destroyAll();
       if (!isMobile) {
-        const scroller = document.querySelector('.scroller');
         const progressbar = document.getElementById('progressbar');
         progressbar.style.height = "0%";
+        // Resize Observer / Damit wird sichergestellt, dass der Scrolltrigger 
+        // nach jeder Layoutänderung der Höhe aktualisiert wird.
+        // Ohne diesen Block laufen die Animationen zum Teil fehlerhaft.
+        const resizeObserver = new ResizeObserver((entries) => {
+          ScrollTrigger.refresh();
+          for (let entry of entries) {
+            console.log('observer -> ' + entry.contentRect.height);
+          }
+        });
+        resizeObserver.observe(layoutContainer);
         // EdgeEasing
         var __extends = this && this.__extends || function () {
           var extendStatics = function (d, b) {
@@ -45,8 +48,10 @@ const Layout = ({ children }) => {
 
         var EdgeEasingPlugin = /** @className */ function (_super) {
           __extends(EdgeEasingPlugin, _super);
+
           function EdgeEasingPlugin() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
+            this.options.disabled = true;
             _this._remainMomentum = {
               x: 0,
               y: 0
@@ -58,7 +63,7 @@ const Layout = ({ children }) => {
             var x = this._remainMomentum.x + delta.x;
             var y = this._remainMomentum.y + delta.y;
             // clamps momentum within [-offset, limit - offset]
-            if (!this.options.disbabled)
+            if (!this.options.disabled)
               this.scrollbar.setMomentum(Math.max(-offset.x, Math.min(x, limit.x - offset.x)), Math.max(-offset.y, Math.min(y, limit.y - offset.y)));
             return { x: 0, y: 0 };
           };
@@ -69,9 +74,8 @@ const Layout = ({ children }) => {
           return EdgeEasingPlugin;
         }(Scrollbar.ScrollbarPlugin);
         Scrollbar.use(EdgeEasingPlugin);
-
         //Scrollbar init
-        bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1, delegateTo: document, alwaysShowTracks: false });
+        bodyScrollBar = Scrollbar.init(scroller, { damping: 0.1, delegateTo: document, alwaysShowTracks: true });
         ScrollTrigger.scrollerProxy(".scroller", {
           scrollTop(value) {
             if (arguments.length) {
@@ -82,24 +86,15 @@ const Layout = ({ children }) => {
         });
         bodyScrollBar.addListener(ScrollTrigger.update);
         ScrollTrigger.defaults({ scroller: scroller });
-
         ScrollTrigger.create({
           onUpdate({ progress, direction, isActive }) {
             progressbar.style.height = `${(progress * 100).toFixed()}%`;
           }
         })
-
-        // Set Position gsap Markers / only development mode
+        bodyScrollBar.updatePluginOptions('edgeEasing', { disabled: false });
         setTimeout(() => {
-          if (document.querySelector('.gsap-marker-scroller-start')) {
-            const markers = gsap.utils.toArray('[class *= "gsap-marker"]');
-            bodyScrollBar.addListener(({ offset }) => {
-              gsap.set(markers, { marginTop: -offset.y })
-            });
-          }
-          dispatch({ type: "LAYOUT_RENDERED_TYPE", layoutRendered: true });
-          bodyScrollBar.updatePluginOptions('edgeEasing', { disbabled: false });
-        }, 500);
+          console.log('timeout -> ' + layoutContainer.getBoundingClientRect().height);
+        }, 3000);
       }
       else {
         // mobile Version
@@ -110,13 +105,10 @@ const Layout = ({ children }) => {
             progressbar.style.height = `${(progress * 100).toFixed()}%`;
           }
         })
-        dispatch({ type: "LAYOUT_RENDERED_TYPE", layoutRendered: true });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageRendered]);
-
-
+  }, []);
 
   return (
     <>
@@ -129,11 +121,14 @@ const Layout = ({ children }) => {
         </div>
         :
         <div className="scroller">
-          <div className={`${styles.layoutContainer} layout-container`}>
+          <div className={`${styles.layoutContainer} layout-container ${renderFooter ? 'renderFooter' : ''}`}>
             <div className={`${styles.layoutMainContent} layout-main`}>
               {children}
             </div>
-            <Footer triggerClass={styles.layoutMainContent} />
+            {renderFooter ?
+              <Footer triggerClass={styles.layoutMainContent} />
+              : <></>
+            }
           </div>
         </div>
       }

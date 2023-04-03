@@ -9,26 +9,23 @@ const transition_opacity = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 const InformationBoxHero = ({ information }) => {
   const cref = useRef(null);
   const tl = useRef(null);
-  const { layoutRendered } = useGlobalStateContext();
 
   useEffect(() => {
-    if (layoutRendered) {
-      const q = gsap.utils.selector(cref);
-      gsap.to(q(`.${styles.informationBoxHeroContainer}`), {
-        ease: Power3.easeOut,
-        opacity: 0,
-        y: 100,
-        duration: 1,
-        scrollTrigger: {
-          trigger: q(`.${styles.informationBoxHeroContainer}`),
-          start: "top top",
-          end: "bottom",
-          scrub: true,
-          toggleActions: "play none none none"
-        }
-      });
-    }
-  }, [layoutRendered]);
+    const q = gsap.utils.selector(cref);
+    gsap.to(q(`.${styles.informationBoxHeroContainer}`), {
+      ease: Power3.easeOut,
+      opacity: 0,
+      y: 100,
+      duration: 1,
+      scrollTrigger: {
+        trigger: q(`.${styles.informationBoxHeroContainer}`),
+        start: "top top",
+        end: "bottom",
+        scrub: true,
+        toggleActions: "play none none none"
+      }
+    });
+  }, []);
 
 
   return (

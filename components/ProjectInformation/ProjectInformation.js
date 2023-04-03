@@ -11,7 +11,6 @@ const transition_opacity = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 const ProjectInformation = ({ project }) => {
   const cref = useRef(null);
   const tl = useRef(null);
-  const { layoutRendered } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
   const { cursorStyles } = useGlobalStateContext();
 
@@ -21,22 +20,20 @@ const ProjectInformation = ({ project }) => {
   }
 
   useEffect(() => {
-    if (layoutRendered) {
-      /*const q = gsap.utils.selector(cref);
-      tl.current = gsap.timeline({ paused: true });
-      tl.current.from(q(`.${styles.titleContainer}>h1`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .3)
-        .from(q(`.${styles.titleContainer}>ul`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .5)
-        .from(q(`.${styles.descriptionContainer}`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .7)
-        .from(q(`.${styles.projectInformationContainer}>a`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .9);
-      ScrollTrigger.create({
-        trigger: cref,
-        animation: tl.current,
-        start: "top 70%",
-        end: "bottom 20%",
-        toggleActions: "play none none none"
-      })*/
-    }
-  }, [layoutRendered]);
+    /*const q = gsap.utils.selector(cref);
+    tl.current = gsap.timeline({ paused: true });
+    tl.current.from(q(`.${styles.titleContainer}>h1`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .3)
+      .from(q(`.${styles.titleContainer}>ul`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .5)
+      .from(q(`.${styles.descriptionContainer}`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .7)
+      .from(q(`.${styles.projectInformationContainer}>a`), .6, { y: 20, opacity: 0, ease: Power3.easeOut }, .9);
+    ScrollTrigger.create({
+      trigger: cref,
+      animation: tl.current,
+      start: "top 70%",
+      end: "bottom 20%",
+      toggleActions: "play none none none"
+    });*/
+  }, []);
 
   return (
     <>
