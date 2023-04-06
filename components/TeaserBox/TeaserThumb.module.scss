@@ -41,6 +41,10 @@
         margin-top: 20px;
         margin-bottom: 70px;
 
+        &.large {
+          margin-bottom: 0;
+        }
+
         @include media("<=desktop") {
           margin-top: 15px;
           margin-bottom: 60px;
@@ -62,7 +66,7 @@
         h3::after {
           content: "";
           position: absolute;
-          bottom: 0px;
+          bottom: 0;
           left: 0;
           right: 0;
           height: 1px;

@@ -30,7 +30,7 @@ const StrapiImage = ({ image, reveal }) => {
                     sources.map((source) => {
                         if (source.minWidth == 250)
                             return (
-                                <img className={reveal} key={`image-${image.id}`} src={source.srcSet} alt={image.alternativeText} />
+                                <img className={reveal} key={`image-${image.id}`} src={source.srcSet} alt={image.attributes.alternativeText} />
                             );
                         else
                             return (
@@ -38,7 +38,7 @@ const StrapiImage = ({ image, reveal }) => {
                             )
                     })
                     :
-                    <img className={reveal} src={getMediaURL() + image.attributes.url} alt={image.alternativeText} />
+                    <img className={reveal} src={getMediaURL() + image.attributes.url} alt={image.attributes.alternativeText} />
                 }
             </picture>
         )

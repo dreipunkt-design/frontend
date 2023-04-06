@@ -22,8 +22,7 @@ const variants = {
   },
 }
 
-const TeaserThumb = ({ project, column }) => {
-  //const services = project.attributes.services.data;
+const TeaserThumb = ({ project, column, large }) => {
   const imageData = project.attributes.mainimage.data;
   const thumbImageClass = (column === 'single') ? styles.thumbImageSingle : styles.thumbImage;
   const cref = useRef(null);
@@ -43,12 +42,12 @@ const TeaserThumb = ({ project, column }) => {
   useEffect(() => {
     const q = gsap.utils.selector(cref);
     // Anfangsanimation - maske nach oben aufschieben
-    tl.current = gsap.timeline({ paused: true });
-    tl.current.from(q(`.${styles.teaserThumb}`), 1, { y: 300, ease: Power3.easeOut }, 0.1)
-      .from(q(`.${styles.info}`), 1, { y: 30, opacity: 0, ease: Power3.easeOut });
+    const tl = gsap.timeline({ paused: true });
+    tl.from(q(`.${styles.teaserThumb}`), { y: 300, ease: Power3.easeOut, duration: 1 })
+      .from(q(`.${styles.info}`), { y: 30, opacity: 0, ease: Power3.easeOut, duration: 1 }, 1);
     ScrollTrigger.create({
       trigger: cref,
-      animation: tl.current,
+      animation: tl,
       start: "top 80%",
       end: "bottom 20%",
       toggleActions: "play none none none",
@@ -67,24 +66,12 @@ const TeaserThumb = ({ project, column }) => {
       animation: uncover,
       scrub: true
     });
-    // Scroll-Animation linke Spalte
-    if (column === 'left') {
-      const move = gsap.timeline({ paused: true })
-      gsap.set(cref, { y: -200 })
-      move.to(cref, { y: 200, ease: 'none' });
-      ScrollTrigger.create({
-        trigger: cref,
-        start: 'center bottom',
-        animation: move,
-        scrub: true
-      });
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
 
-    <div ref={el => cref = el} className={`${styles.teaserThumbContainer} ${column === 'single' ? styles.single : ''}`}>
+    <div ref={el => cref = el} className={`${styles.teaserThumbContainer} ${column === 'single' && !large ? styles.single : ''}`}>
       <div
         onMouseEnter={() => {
           if (!clicked) onCursor("project");
@@ -112,20 +99,13 @@ const TeaserThumb = ({ project, column }) => {
               exit={clicked ? "move" : "hide"}
               variants={variants}
             >
-              <motion.div className={styles.info}
+              <motion.div className={`${styles.info} ${large ? styles.large : ''}`}
                 exit={{ opacity: 0 }}
                 transition={transition_opacity}
               >
                 <div className={`${styles.caption} ${column === 'single' ? styles.single : ''}`}>
                   {project.attributes.caption}
                 </div>
-                {/*<ul>
-                  {services && services.map((service) => {
-                    return (
-                      <li key={`${project.id}-${service.id}`}>{service.attributes.label}</li>
-                    );
-                  })}
-                </ul>*/}
                 <h3>
                   {project.attributes.title}
                 </h3>
