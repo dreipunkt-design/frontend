@@ -71,7 +71,8 @@ const TeaserThumb = ({ project, column, large }) => {
 
   return (
 
-    <div ref={el => cref = el} className={`${styles.teaserThumbContainer} ${column === 'single' && !large ? styles.single : ''}`}>
+    <div ref={el => cref = el}
+      className={`${styles.teaserThumbContainer} ${column === 'single' && !large ? styles.single : ''} ${large ? styles.large : ''}`}>
       <div
         onMouseEnter={() => {
           if (!clicked) onCursor("project");

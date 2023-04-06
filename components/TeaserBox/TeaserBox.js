@@ -11,7 +11,7 @@ const TeaserBox = ({ teasers }) => {
         {teasers && teasers.map((teaser_group, index) => {
           if (teaser_group.__component == "teasers.teasers-single-column") {
             return (
-              <div key={index} className={`${styles.containerOneColumns} ${teaser_group.large ? styles.large : ''}`}>
+              <div key={index} className={`${styles.containerOneColumns}`}>
                 <TeasersColumn teasers={teaser_group} column={'single'} />
               </div>
             )

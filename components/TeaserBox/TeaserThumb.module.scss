@@ -10,11 +10,18 @@
       padding-left: 0px;
       padding-right: 0px;
     }
+  }
 
-    /*
+  &.large {
+    margin-top: 110px;
+
+    @include media("<=desktop") {
+      margin-top: 80px;
+    }
+
     @include media("<=tablet") {
-      padding: 0 8px 0 20px;
-    }*/
+      margin-top: 40px;
+    }
   }
 
   a,
@@ -40,10 +47,6 @@
         white-space: normal;
         margin-top: 20px;
         margin-bottom: 70px;
-
-        &.large {
-          margin-bottom: 0;
-        }
 
         @include media("<=desktop") {
           margin-top: 15px;
