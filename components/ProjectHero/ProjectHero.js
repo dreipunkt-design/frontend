@@ -129,7 +129,7 @@ const ProjectHero = ({ image, imagePhone }) => {
                   {sources.map((source) => {
                     if (source.minWidth == 250)
                       return (
-                        <img key={`image-${image.id}`} src={source.srcSet} alt={image.attributes.alternativeText} />
+                        <img key={`image-${image.id}`} src={source.srcSet} alt={image.data.attributes.alternativeText} />
                       );
                     else
                       return (
@@ -150,9 +150,9 @@ const ProjectHero = ({ image, imagePhone }) => {
               >
                 <picture>
                   {sources.map((source) => {
-                    if (source.minWidth == 250)
+                    if (source.minWidth == 250) {
                       return (
-                        <motion.img key={`image-${image.id}`} src={source.srcSet} alt={image.attributes.alternativeText}
+                        <motion.img key={`image-${image.id}`} src={source.srcSet} alt={image.data.attributes.alternativeText}
                           initial="initial"
                           animate={imgFinished ? "set" : "animate"}
                           variants={variants_img}
@@ -161,6 +161,7 @@ const ProjectHero = ({ image, imagePhone }) => {
                           }}
                         />
                       );
+                    }
                     else
                       return (
                         <source key={`source-${image.id}-${source.minWidth}`} media={`(min-width: ${source.minWidth}px)`} srcSet={source.srcSet} />
