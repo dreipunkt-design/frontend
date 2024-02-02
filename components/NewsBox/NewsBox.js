@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link"
 import { gsap, Power3 } from "gsap"
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
@@ -6,11 +6,11 @@ import styles from "./NewsBox.module.scss"
 import { useGlobalStateContext, useGlobalDispatchContext } from "../../context/appContext"
 
 const NewsBox = ({ news }) => {
-  const cref = useRef(null);
-  const { cursorStyles } = useGlobalStateContext();
-  const dispatch = useGlobalDispatchContext();
-  let lastImage = null;
-  let lastType = null;
+  const cref = useRef(null),
+    { cursorStyles } = useGlobalStateContext(),
+    dispatch = useGlobalDispatchContext();
+  let lastImage = null,
+    lastType = null;
 
   const onCursor = (cursorType, image) => {
     let set = false;
@@ -81,8 +81,14 @@ const NewsBox = ({ news }) => {
               return (
                 <Link href="#" key={newitem.id}>
                   <a
-                    onMouseEnter={() => onCursor("news", newitem.attributes.image)}
-                    onMouseLeave={() => onCursor()}
+                    onMouseEnter={() => {
+                      console.log('hover -> ' + newitem.attributes.titel);
+                      onCursor("news", newitem.attributes.image);
+                    }}
+                    onMouseLeave={() => {
+                      console.log('leave -> ' + newitem.attributes.titel);
+                      onCursor()
+                    }}
                   >
                     <div className={styles.newsContainer}
                     >

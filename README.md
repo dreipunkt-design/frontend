@@ -40,3 +40,11 @@ npx serve -p 5000 out/
 ## Deploy
 copy frontend /out
 copy backend /public/uploads 
+
+# Zugriff per SSH
+# Frontend
+ssh root@164.92.167.114
+
+# Strapi
+ssh root@142.93.165.146
+

@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react"
-import { gsap, Power3 } from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
 import { motion } from "framer-motion";
-
 import styles from './Hero.module.scss';
-import { useGlobalStateContext, useGlobalDispatchContext } from "../../context/appContext"
+import { useGlobalDispatchContext } from "../../context/appContext"
 
 const transition = { duration: .6, ease: [0.6, 0.01, -0.05, 0.9] };
 const transition_opacity = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
@@ -65,7 +64,7 @@ const Hero = ({ url, title, text }) => {
               <source type="video/mp4" src={url} />
             </video>
           </motion.div>
-          <div ref={el => textRef = el} className={`${styles.heroContent} content-padding`} >
+          <div ref={el => textRef = el} className={`${styles.heroContent} content-padding`}>
             <motion.h1
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}

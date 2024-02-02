@@ -5,10 +5,12 @@ import styles from "./ProjectImageFullWidth.module.scss"
 import StrapiImage from "../StrapiImage";
 import { useGlobalDispatchContext } from "../../context/appContext"
 import { getMediaURL } from "../../lib/api"
+import useWindowSize from './../../hooks/useWindowSize'
 
 const ProjectImageFullWidth = ({ detail }) => {
   const cref = useRef(null);
   const dispatch = useGlobalDispatchContext();
+  const windowSize = useWindowSize();
 
   useEffect(() => {
     // Logofarbe weiß/schwarz
@@ -31,7 +33,7 @@ const ProjectImageFullWidth = ({ detail }) => {
       animation: clip,
       scrub: true
     });
-    if (window.innerWidth > process.env.breakpoints.tablet) {
+    if (windowSize.width > process.env.breakpoints.tablet) {
       const img = gsap.timeline({ paused: true }),
         elem = (detail.media.data.attributes.mime.indexOf('video') !== -1) ? 'video' : 'img';
       img.to(q(elem), { y: '30vh' })

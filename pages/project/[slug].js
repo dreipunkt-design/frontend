@@ -7,6 +7,8 @@ import ProjectDetails from "../../components/ProjectDetails"
 import ProjectsBoxNext from "../../components/ProjectBoxNext"
 
 const Project = ({ project, nextProject, page }) => {
+  console.log(nextProject);
+  console.log(page.attributes.details);
   return (
     <>
       <HeadInformation title={page.attributes.title} seo={page.attributes.seo} />
@@ -36,11 +38,11 @@ export async function getStaticProps({ params }) {
   const [projectsRes, pageRes] = await Promise.all([
     fetchAPI("/projects", { populate: "*", sort: "sort:desc" }),
     fetchAPI("/project-" + params.slug, {
-      populate: {
+      populate: "deep" /*{
         populate: "*",
         seo: { populate: "*" },
         details: { populate: "*" },
-      },
+      },*/
     }),
   ]);
 

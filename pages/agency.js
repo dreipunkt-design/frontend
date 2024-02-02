@@ -13,7 +13,7 @@ import ClientsBox from "../components/ClientsBox";
 
 export default function Profile({ page }) {
     const dispatch = useGlobalDispatchContext();
-
+    console.log(page);
     return (
         <>
             <HeadInformation title={page.attributes.title} seo={page.attributes.seo} />
@@ -35,7 +35,7 @@ export default function Profile({ page }) {
 export async function getStaticProps() {
     const [pageRes] = await Promise.all([
         fetchAPI("/page-agency", {
-            populate: {
+            populate: "deep" /*{
                 populate: "*",
                 seo: { populate: "*" },
                 hero: { populate: "*" },
@@ -43,7 +43,7 @@ export async function getStaticProps() {
                 information: { populate: "*" },
                 services: { populate: "*" },
                 clients: { populate: "*" }
-            },
+            },*/
         }),
     ]);
     return {
