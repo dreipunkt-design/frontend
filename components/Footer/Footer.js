@@ -172,7 +172,7 @@ const Footer = ({ triggerClass }) => {
                     onMouseLeave={onCursor}>Datenschutz</a>
                 </Link>
               </div>
-              <div>COPYRIGHT © 2023 DREIPUNKT</div>
+              <div>COPYRIGHT © 2024 DREIPUNKT</div>
             </div>
           </div>
         </div>

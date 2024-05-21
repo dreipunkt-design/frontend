@@ -7,8 +7,6 @@ import ProjectDetails from "../../components/ProjectDetails"
 import ProjectsBoxNext from "../../components/ProjectBoxNext"
 
 const Project = ({ project, nextProject, page }) => {
-  console.log(nextProject);
-  console.log(page.attributes.details);
   return (
     <>
       <HeadInformation title={page.attributes.title} seo={page.attributes.seo} />
@@ -35,32 +33,85 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const [projectsRes, pageRes] = await Promise.all([
+  const [projectsRes, pageRes, pageWork] = await Promise.all([
     fetchAPI("/projects", { populate: "*", sort: "sort:desc" }),
     fetchAPI("/project-" + params.slug, {
-      populate: "deep" /*{
-        populate: "*",
-        seo: { populate: "*" },
-        details: { populate: "*" },
-      },*/
+      populate: "deep"
     }),
+    fetchAPI("/page-work", {
+      populate: "deep"
+    })
   ]);
+
+  const projectsPageWork = pageWork.data.attributes.projects;
+  let ix = 0, jx = 0,
+    projectsData = new Array();
+  for (ix = 0; ix < projectsPageWork.length; ix++) {
+    if (projectsPageWork[ix].__component == "teasers.teasers-single-column") {
+      for (jx = 0; jx < projectsPageWork[ix].center.length; jx++)
+        projectsData.push(projectsPageWork[ix].center[jx].project.data);
+    }
+    else {
+      const lr = (projectsPageWork[ix].right.length > projectsPageWork[ix].left.length) ? 1 : 0;
+      let rx = 0,
+        lx = 0;
+      for (jx = 0; jx < projectsPageWork[ix].right.length + projectsPageWork[ix].left.length; jx++) {
+        if (lx < projectsPageWork[ix].left.length && rx < projectsPageWork[ix].right.length) {
+          if (jx % 2 === lr) {
+            projectsData.push(projectsPageWork[ix].left[lx].project.data);
+            lx++;
+          }
+          else {
+            projectsData.push(projectsPageWork[ix].right[rx].project.data);
+            rx++;
+          }
+        }
+        else {
+          if (lx < projectsPageWork[ix].left.length) {
+            projectsData.push(projectsPageWork[ix].left[lx].project.data);
+            lx++;
+          }
+          if (rx < projectsPageWork[ix].right.length) {
+            projectsData.push(projectsPageWork[ix].right[rx].project.data);
+            rx++;
+          }
+        }
+      }
+    }
+  }
+
+  let projects = {
+    data: projectsData
+  }
+
+  if (!projectsData.length) {
+    projects = projectsRes;
+  }
 
   let currentProject = null,
     ixCurrentProject = null,
     ixNextProject = null,
-    nextProject,
-    ix = 0;
-  for (ix = 0; ix < projectsRes.data.length; ix++) {
-    if (projectsRes.data[ix].attributes.slug === params.slug) {
-      currentProject = projectsRes.data[ix];
+    nextProject;
+  for (ix = 0; ix < projects.data.length; ix++) {
+    if (projects.data[ix].attributes.slug === params.slug) {
+      currentProject = projects.data[ix];
       ixCurrentProject = ix;
       break;
     }
   }
+  if (currentProject === null) {
+    projects = projectsRes;
+    for (ix = 0; ix < projects.data.length; ix++) {
+      if (projects.data[ix].attributes.slug === params.slug) {
+        currentProject = projects.data[ix];
+        ixCurrentProject = ix;
+        break;
+      }
+    }
+  }
   ixNextProject = ixCurrentProject + 1;
-  if (ixNextProject >= projectsRes.data.length) ixNextProject = 0;
-  nextProject = projectsRes.data[ixNextProject];
+  if (ixNextProject >= projects.data.length) ixNextProject = 0;
+  nextProject = projects.data[ixNextProject];
 
   return {
     props: {

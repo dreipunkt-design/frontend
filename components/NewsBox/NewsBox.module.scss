@@ -5,24 +5,14 @@
   background-color: $lightGray;
   position: relative;
 
-  .newsTitelContainerxx {
-    display: flex;
-    position: relative;
-    padding: 2.4rem 0 2rem;
-
-    .spacerContainer {
-      width: 40%;
-    }
-
+  .newsTitelContainer {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
     .titleContainer {
-      width: 60%;
-      font-size: 1rem;
-      color: $green;
-      text-transform: uppercase;
-      line-height: 1rem;
+      @extend %fontTitleSmall;
     }
   }
-
+  
   a,
   a:visited,
   a:hover,
@@ -42,34 +32,33 @@
         flex-wrap: wrap;
       }
 
-      .titelContainer {
+      .datum {
+        width: 20%;
+        color: $darkerGray;
+        @extend %fontTitleSmall;
+        @include media("<=tablet") {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+      }
+
+      .titel {
         width: 40%;
-        padding-right: 30px;
+        @extend %fontTitleLarge;
 
         @include media("<=tablet") {
           width: 100%;
-          margin-bottom: 30px;
-        }
-
-        .titel {
-          margin-top: 15px;
-          @extend %fontTitleLarge;
-
-          @include media("<=tablet") {
-            margin-top: 5px;
-          }
-        }
-
-        .datum {
-          color: $green;
+          margin-bottom: 10px;
         }
       }
 
       .info {
-        width: 60%;
-
+        width: 40%;
+        margin-left: 5%;
+        @extend %fontText;
         @include media("<=tablet") {
-          width: 100%
+          width: 100%;
+          margin-left: 0;
         }
       }
     }
@@ -109,11 +98,9 @@
     }
 
     .titleContainer {
+      @extend %fontTitleSmall;
       width: 60%;
-      font-size: 1rem;
       color: $green;
-      text-transform: uppercase;
-      line-height: 1rem;
     }
   }
 

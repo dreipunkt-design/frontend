@@ -11,20 +11,19 @@
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    justify-content: center;
-    overflow: hidden;
+    justify-content: left;
+    //overflow: hidden;
 
     .title {
       user-select: none;
       @extend %fontTitleSmall;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
     }
 
     .information {
       user-select: none;
       width: 100%;
       @extend %fontSubStatement;
-      text-align: center;
       max-width: 970px;
     }
   }

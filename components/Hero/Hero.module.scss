@@ -32,7 +32,7 @@
       text-align: left;
       margin: auto;
       z-index: 6;
-      top: 40%;
+      top: 30%;
       right: 0;
       left: 0;
 
@@ -41,29 +41,30 @@
       }
 
       h1 {
-        @extend %fontTitleSmall;
-        color: $white;
-        margin-bottom: 15px;
         display: flex;
-        user-select: none;
-
-        .line {
-          display: block;
-          height: 1px;
-          width: 100px;
-          user-select: none;
-          background-color: $white !important;
-          transform: translateY(12px);
-          margin-left: 10px;
-        }
-      }
-
-      h3 {
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        color: $white;
         user-select: none;
         @extend %fontMainStatement;
+        text-transform: uppercase;
+        
+        .line1 {
+          margin-left: 10%;
+          line-height: inherit;
+        }
 
-        @include media("<=tablet") {
-          line-height: 1.2;
+        .line2 {
+          text-align: center;
+          width: 100%;
+          line-height: inherit;
+        }
+
+        .line3 {
+          color: $green;
+          margin-right: 10%;
+          line-height: inherit;
         }
       }
     }

@@ -4,6 +4,7 @@
 .projectInformationContainer {
   width: 100%;
   @extend %paddingHeaderLeft;
+  @extend %content-padding-right;
 
   @include media("<=tablet") {
     margin-bottom: 50px;
@@ -35,7 +36,7 @@
 
     h1 {
       user-select: none;
-      @extend %fontSubStatement;
+      @extend %fontTitleLarge;
       text-transform: uppercase;
     }
   }
@@ -124,6 +125,7 @@
     .descriptionContainer {
       margin-bottom: 50px;
       flex: 1;
+      @extend %fontText;
 
       @include media("<=smallDesktop") {
         flex: none;

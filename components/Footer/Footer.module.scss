@@ -25,17 +25,6 @@
         @include media("<=tablet") {
           margin-bottom: 20vh;
         }
-
-        .title {
-          @extend %fontXL;
-          margin-bottom: 30px;
-
-          span {
-            color: $green;
-          }
-        }
-
-
       }
 
       .infoNavigation {
@@ -54,12 +43,14 @@
             margin-right: 175px;
 
             .navColTitle {
-              text-transform: uppercase;
+              @extend %fontTitleSmall;
               color: $darkestGray;
               margin-bottom: 10px;
             }
 
             .navColContent {
+              @extend %fontTitleSmall;
+              text-transform: none;
               color: $darkGray;
 
               .contact {

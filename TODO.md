@@ -40,4 +40,6 @@ funktioniert nicht.
 NEXT_PUBLIC_STRAPI_API_URL = http://localhost:1337
 NEXT_PUBLIC_MEDIA_API_URL = http://dreipunkt.agentur-dreipunkt.de
 
+* Auf einigen Rechner ist der Api-Aufruf mit localhost nicht möglich.
+In diesem Fall muss die URL http://127.0.0.1:1337 lauten.
 

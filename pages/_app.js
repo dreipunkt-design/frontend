@@ -10,6 +10,7 @@ import ScrollProgressBar from "../components/ScrollProgressBar"
 import { AppProvider } from "../context/appContext"
 import Cursor from "../components/Cursor"
 import Navigation from "../components/Navigation"
+import { getStrapiURL } from "./../lib/api"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,8 +43,9 @@ function App({ Component, pageProps, router }) {
     const layoutContainer = document.querySelector('.layout-container');
     if (layoutContainer) console.log('_app -> useEffect [] ' + layoutContainer.getBoundingClientRect().height);
     router.push(router.asPath); // damit fix auch beim ersten laden funktioniert
-    console.log("%c©2022 dreipunkt", "color: #008876; font-size: 21px");
+    console.log("%c©2024 dreipunkt", "color: #008876; font-size: 21px");
     console.log('isMobile: ', isMobile);
+    console.log('api: ',getStrapiURL());
     gsap.to("body", { visibility: "visible" });
     if (document.readyState == "complete") {
       gsap.to("body", { visibility: "visible" });

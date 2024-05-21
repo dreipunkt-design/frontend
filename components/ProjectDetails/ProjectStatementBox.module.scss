@@ -9,9 +9,8 @@
 
   .information {
     user-select: none;
-    @extend %fontSubStatement;
+    @extend %fontStatementSmall;
     text-align: center;
     max-width: 970px;
-    line-height: 3rem;
   }
 }

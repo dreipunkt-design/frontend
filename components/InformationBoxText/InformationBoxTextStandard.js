@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 import { gsap, Power3 } from "gsap"
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
 import { motion } from "framer-motion"
+import HighlightedText from "./../../lib/HighLightedText"
 import styles from "./InformationBoxTextStandard.module.scss"
-import { useGlobalStateContext } from "../../context/appContext"
 
 const transition_opacity = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 
@@ -36,7 +36,7 @@ const InformationBoxTextStandard = ({ information }) => {
           <div className={styles.informationBoxContainerInner}>
             <div className={`${styles.title}`}>{information.title}</div>
             <div className="break"></div>
-            <div className={styles.information}>{information.text}</div>
+            <div className={styles.information}><HighlightedText text={information.text} /></div>
           </div>
         </motion.div>
       </section>

@@ -8,7 +8,7 @@ import { useGlobalDispatchContext } from "../../context/appContext"
 const transition = { duration: .6, ease: [0.6, 0.01, -0.05, 0.9] };
 const transition_opacity = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 
-const Hero = ({ url, title, text }) => {
+const Hero = ({ url, line1, line2, line3 }) => {
   const cref = useRef(null);
   const textRef = useRef(null);
   const dispatch = useGlobalDispatchContext();
@@ -65,16 +65,7 @@ const Hero = ({ url, title, text }) => {
             </video>
           </motion.div>
           <div ref={el => textRef = el} className={`${styles.heroContent} content-padding`}>
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                ease: [0.6, 0.01, -0.05, 0.9],
-                duration: 0.7,
-                delay: 0.5,
-              }}
-            ><span>{title}</span></motion.h1>
-            <motion.h3
+             <motion.h1
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -82,8 +73,11 @@ const Hero = ({ url, title, text }) => {
                 duration: 0.7,
                 delay: 0.6,
               }}
-            >{text}
-            </motion.h3>
+            >
+              <div className={styles.line1}>{line1}</div>
+              <div className={styles.line2}>{line2}</div>
+              <div className={styles.line3}>{line3}</div>
+            </motion.h1>
           </div>
         </section>
       </motion.div>

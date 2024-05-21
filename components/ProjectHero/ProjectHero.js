@@ -8,6 +8,7 @@ import { getMediaURL } from "../../lib/api"
 let transition = { duration: .6, ease: [0.6, 0.01, -0.05, 0.9] };
 
 const ProjectHero = ({ image, imagePhone }) => {
+  const spacerUrl = '/uploads/spacermain_170db74000.jpg';
   const cref = useRef(null);
   const dispatch = useGlobalDispatchContext();
   const { thumbPosition } = useGlobalStateContext();
@@ -82,19 +83,23 @@ const ProjectHero = ({ image, imagePhone }) => {
   }
   let imageSet = new Array();
   let imageData = image.data;
-  let imagePhoneData = imagePhone.data;
-  imageSet.push(getMediaURL() + imageData.attributes.url);
-  if (imageData.attributes.formats.hasOwnProperty('large'))
-    imageSet.push(getMediaURL() + imageData.attributes.formats.large.url);
-  if (imageData.attributes.formats.hasOwnProperty('medium'))
-    imageSet.push(getMediaURL() + imageData.attributes.formats.medium.url);
-  if (imagePhoneData) {
-    imageSet.push(getMediaURL() + imagePhoneData.attributes.url);
+  if (imageData !== null) {
+    let imagePhoneData = imagePhone.data;
+    imageSet.push(getMediaURL() + imageData.attributes.url);
+    if (imageData.attributes.formats.hasOwnProperty('large'))
+      imageSet.push(getMediaURL() + imageData.attributes.formats.large.url);
+    if (imageData.attributes.formats.hasOwnProperty('medium'))
+      imageSet.push(getMediaURL() + imageData.attributes.formats.medium.url);
+    if (imagePhoneData) {
+      imageSet.push(getMediaURL() + imagePhoneData.attributes.url);
+    }
+    else {
+      if (imageData.attributes.formats.hasOwnProperty('small'))
+        imageSet.push(getMediaURL() + imageData.attributes.formats.small.url);
+    }
   }
-  else {
-    if (imageData.attributes.formats.hasOwnProperty('small'))
-      imageSet.push(getMediaURL() + imageData.attributes.formats.small.url);
-  }
+  else
+    imageSet.push(getMediaURL() + spacerUrl);
   let minWidthMax = imageSet.length * 250;
   let sources = new Array();
   imageSet.map((image) => {
@@ -129,7 +134,7 @@ const ProjectHero = ({ image, imagePhone }) => {
                   {sources.map((source) => {
                     if (source.minWidth == 250)
                       return (
-                        <img key={`image-${image.id}`} src={source.srcSet} alt={image.data.attributes.alternativeText} />
+                        <img key={`image-${image.id}`} src={source.srcSet} alt={(imageData !== null) ? image.data.attributes.alternativeText : ''} />
                       );
                     else
                       return (
@@ -152,7 +157,7 @@ const ProjectHero = ({ image, imagePhone }) => {
                   {sources.map((source) => {
                     if (source.minWidth == 250) {
                       return (
-                        <motion.img key={`image-${image.id}`} src={source.srcSet} alt={image.data.attributes.alternativeText}
+                        <motion.img key={`image-${image.id}`} src={source.srcSet} alt={(imageData !== null) ? image.data.attributes.alternativeText : ''}
                           initial="initial"
                           animate={imgFinished ? "set" : "animate"}
                           variants={variants_img}

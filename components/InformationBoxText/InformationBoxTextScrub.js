@@ -40,7 +40,14 @@ const InformationBoxTextScrub = ({ information }) => {
             <div className={styles.informationBoxContent}>
               <div className={`${styles.title}`}>{information.title}</div>
               <div className="break"></div>
+              {information.main_title.length ?
+              <>              
+              <div className={styles.information}>{information.main_title}</div>
+              <div className={styles.text}>{information.text}</div>
+              </>
+              :
               <div className={styles.information}>{information.text}</div>
+              }
             </div>
           </div>
         </motion.div>

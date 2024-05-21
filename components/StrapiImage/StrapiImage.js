@@ -1,6 +1,7 @@
 import { getMediaURL } from "../../lib/api"
 
 const StrapiImage = ({ image, reveal }) => {
+    const spacerUrl = '/uploads/spacermain_170db74000.jpg';
     if (image) {
         // SrcSet Aufbereiten
         let imageSet = new Array();
@@ -43,7 +44,11 @@ const StrapiImage = ({ image, reveal }) => {
             </picture>
         )
     }
-    else return (<></>);
+    else return (
+        <picture>
+            <img src={getMediaURL()+spacerUrl} />
+        </picture>
+    );
 }
 
 export default StrapiImage

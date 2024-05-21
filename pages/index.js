@@ -17,7 +17,9 @@ export default function Home({ news, page }) {
         <Hero
           url={getMediaURL() + page.attributes.hero.media.data.attributes.url}
           title={page.attributes.hero.title}
-          text={page.attributes.hero.text}
+          line1={page.attributes.hero.line1}
+          line2={page.attributes.hero.line2}
+          line3={page.attributes.hero.line3}
         />
         <InformationBoxText information={page.attributes.about_quote} />
         <TeaserBox teasers={page.attributes.projects} />

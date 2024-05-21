@@ -1,3 +1,4 @@
+
 @import "../../styles/settings/_settings";
 
 .containerService {
@@ -12,10 +13,15 @@
 
     &.videoLeft {
         flex-direction: row;
+        @extend %content-padding-right;
 
         @include media("<=tablet") {
             flex-direction: unset;
         }
+    }
+
+    &.videoRight {
+        @extend %content-padding-left;
     }
 
     @include media("<=tablet") {
@@ -83,6 +89,7 @@
                 @extend %fontTitleSmall;
                 margin-bottom: 20px;
                 width: 100%;
+                color: $green;
 
                 @include media("<=tablet") {
                     margin-top: 30px;
@@ -100,6 +107,7 @@
 
             .text {
                 user-select: none;
+                @extend %fontText;
                 margin-bottom: 40px;
                 color: $lightGray;
                 width: 100%;
@@ -119,7 +127,6 @@
                 }
 
                 .link {
-
                     a,
                     a:visited,
                     a:hover,

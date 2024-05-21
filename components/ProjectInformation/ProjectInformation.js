@@ -38,7 +38,7 @@ const ProjectInformation = ({ project }) => {
   return (
     <>
       <section ref={el => cref = el}>
-        <motion.div className={`${styles.projectInformationContainer} content-padding-right content-padding-top-extra`}
+        <motion.div className={`${styles.projectInformationContainer} content-padding-top-extra`}
           exit={{ opacity: 0 }}
           transition={transition_opacity}
         >

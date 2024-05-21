@@ -65,9 +65,8 @@ const NewsBox = ({ news }) => {
   return (
     <>
       <section ref={el => cref = el}>
-        <div className={`${styles.newsBoxContainer} content-padding-small-right content-padding-top`}>
+        <div className={`${styles.newsBoxContainer} content-padding content-padding-top`}>
           <div className={styles.newsTitelContainer}>
-            <div className={styles.spacerContainer}></div>
             <div className={styles.titleContainer}>LATEST NEWS</div>
           </div>
           <div>
@@ -75,8 +74,8 @@ const NewsBox = ({ news }) => {
               const jahr = newitem.attributes.datum.substring(0, 4),
                 mm = parseInt(newitem.attributes.datum.substring(5, 7)),
                 tag = newitem.attributes.datum.substring(8, 10),
-                monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli",
-                  "August", "September", "Oktober", "November", "Dezember"],
+                monate = ["Jan", "Feb", "Mrz", "Apr", "Mai", "Jun", "Jul",
+                  "Aug", "Sep", "Okt", "Nov", "Dez"],
                 monat = monate[mm - 1];
               return (
                 <Link href="#" key={newitem.id}>
@@ -92,10 +91,8 @@ const NewsBox = ({ news }) => {
                   >
                     <div className={styles.newsContainer}
                     >
-                      <div className={styles.titelContainer}>
-                        <div className={styles.datum}>{tag} {monat} {jahr}</div>
-                        <div className={styles.titel}>{newitem.attributes.titel}</div>
-                      </div>
+                      <div className={styles.datum}>{tag} {monat} {jahr}</div>
+                      <div className={styles.titel}>{newitem.attributes.titel}</div>
                       <div className={styles.info}>{newitem.attributes.info}</div>
                     </div>
                   </a>

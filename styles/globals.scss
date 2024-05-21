@@ -114,13 +114,13 @@ a.footerNavigationLink:hover,
 a.footerNavigationLink:focus,
 a.footerNavigationLink:active,
 a.footerNavigationLink:link {
+  @extend %fontTitleSmall;
   position: relative;
   text-decoration: none;
   color: $darkGray;
   display: inline-block;
   transition: color 0.5s ease;
   text-transform: none;
-  font-size: 1.4rem;
 }
 
 a.footerNavigationLink::after {
@@ -163,8 +163,7 @@ a.footerGetInTouchLink:link {
   color: $white;
   display: inline-block;
   transition: color 0.5s ease;
-  text-transform: none;
-  @extend %fontXL;
+  @extend %fontMainStatement;
 
   span {
     color: $green;
@@ -351,8 +350,7 @@ a.linkgreen:link {
   color: $green;
   display: inline-block;
   transition: color 0.5s ease;
-  font-size: 1rem;
-  font-family: $fontFamily;
+  @extend %fontTitleSmall;
 }
 
 a.linkgreen::after {
@@ -414,115 +412,6 @@ a.linkgreen::after {
 
 .content-width-limit {
   max-width: 650px;
-}
-
-// Standard-Abstände links und rechts für all Inhalte
-.content-padding {
-  padding: 0 500px 0 550px;
-
-  @include media("<=ultralargeDesktop") {
-    padding: 0 400px 0 450px;
-  }
-
-  @include media("<=extralargeDesktop") {
-    padding: 0 300px 0 350px;
-  }
-
-  @include media("<=largeDesktop") {
-    padding: 0 280px 0 330px;
-  }
-
-  @include media("<=desktop") {
-    padding: 0 200px 0 250px;
-  }
-
-  @include media("<=smallDesktop") {
-    padding: 0 60px;
-  }
-
-  @include media("<=tablet") {
-    padding: 0 20px;
-  }
-}
-
-.content-padding-small-right {
-  padding: 0 350px 0 450px;
-
-  @include media("<=extralargeDesktop") {
-    padding: 0 250px 0 350px;
-  }
-
-  @include media("<=largeDesktop") {
-    padding: 0 200px 0 330px;
-  }
-
-  @include media("<=desktop") {
-    padding: 0 150px 0 250px;
-  }
-
-  @include media("<=smallDesktop") {
-    padding: 0 60px;
-  }
-
-  @include media("<=tablet") {
-    padding: 0 20px;
-  }
-}
-
-.content-padding-right {
-  padding-right: 500px;
-
-  @include media("<=ultralargeDesktop") {
-    padding-right: 400px;
-  }
-
-  @include media("<=extralargeDesktop") {
-    padding-right: 300px;
-  }
-
-  @include media("<=largeDesktop") {
-    padding-right: 280px;
-  }
-
-  @include media("<=desktop") {
-    padding-right: 200px;
-  }
-
-  @include media("<=smallDesktop") {
-    padding-right: 60px;
-  }
-
-  @include media("<=tablet") {
-    padding-right: 20px;
-  }
-}
-
-.content-padding-left {
-  padding-left: 550px;
-
-  @include media("<=ultralargeDesktop") {
-    padding-left: 450px;
-  }
-
-  @include media("<=extralargeDesktop") {
-    padding-left: 350px;
-  }
-
-  @include media("<=largeDesktop") {
-    padding-left: 330px;
-  }
-
-  @include media("<=desktop") {
-    padding-left: 250px;
-  }
-
-  @include media("<=smallDesktop") {
-    padding-left: 60px;
-  }
-
-  @include media("<=tablet") {
-    padding-left: 20px;
-  }
 }
 
 // -----------------------------------
@@ -597,4 +486,8 @@ a.linkgreen::after {
 
 .pin-spacer {
   z-index: -1;
+}
+
+.highlighted-text {
+  color: $green;
 }

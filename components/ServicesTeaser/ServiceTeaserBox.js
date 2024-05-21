@@ -39,7 +39,7 @@ const ServiceTeaserBox = ({ service, videoRight }) => {
     }, []);
 
     return (
-        <div ref={el => cref = el} className={`${styles.containerService} ${(!videoRight) ? styles.videoLeft : ''}`} >
+        <div ref={el => cref = el} className={`${styles.containerService} ${videoRight ? styles.videoRight : styles.videoLeft}`} >
             <div className={styles.serviceVideo}>
                 <div className={styles.containerVideo}>
                     <video autoPlay muted loop playsInline>
@@ -47,7 +47,7 @@ const ServiceTeaserBox = ({ service, videoRight }) => {
                     </video>
                 </div>
             </div>
-            <div className={`${styles.serviceText} ${(videoRight) ? styles.alignRight : styles.alignLeft} ${(videoRight) ? 'content-padding-left' : 'content-padding-right'}`}>
+            <div className={`${styles.serviceText} ${(videoRight) ? styles.alignRight : styles.alignLeft}`}>
                 <div className={`${styles.containerText} ${(videoRight) ? styles.alignRight : ''}`}>
                     <div className={styles.title}>{service.title}</div>
                     <div className={styles.service}>{service.service}</div>

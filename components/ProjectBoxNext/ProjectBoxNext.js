@@ -24,12 +24,10 @@ const variants = {
 const ProjectBoxNext = ({ project }) => {
   const imageData = project.attributes.mainimage.data;
   const cref = useRef(null);
-  const tl = useRef(null);
-  const imageHeightPercent = (imageData.attributes.height / imageData.attributes.width * 100);
+  const imageHeightPercent = (imageData!==null)?(imageData.attributes.height / imageData.attributes.width * 100):50;
   const dispatch = useGlobalDispatchContext();
   const { cursorStyles } = useGlobalStateContext();
   const [clicked, setClicked] = useState(false);
-
   const onCursor = (cursorType, caption) => {
     cursorType = (cursorStyles.includes(cursorType) && cursorType) || false
     dispatch({ type: "CURSOR_TYPE", cursorType: cursorType, caption: caption });
@@ -65,64 +63,58 @@ const ProjectBoxNext = ({ project }) => {
 
   return (
     <>
-      {project.attributes.mainimage.data ?
-        <section ref={el => cref = el}>
-          <div className={`${styles.projectBoxNextContainer} content-padding`}>
-            <div className={styles.projectBoxNextContainerInner}>
-              <div className={styles.projectBoxThumbContainer}>
-                <div
-                  onMouseEnter={() => {
-                    if (!clicked) onCursor("caption", "NEXT");
-                  }}
-                  onMouseLeave={() => {
-                    onCursor();
-                  }}
-                  onClick={() => {
-                    setClicked(true);
-                    onCursor();
-                    const q = gsap.utils.selector(cref),
-                      mask_rect = q(`.${styles.thumbImage}`)[0].getBoundingClientRect(),
-                      img_rect = q('img')[0].getBoundingClientRect();
-                    dispatch({
-                      type: "THUMB_POSITION_TYPE", thumbPosition: {
-                        mask_rect: mask_rect,
-                        img_rect: img_rect
-                      }
-                    })
-                  }}
-                >
-                  <Link href={`/project/${project.attributes.slug}`}>
-                    <a>
-                      <motion.div className={styles.projectBoxThumb}
-                        exit={clicked ? "move" : "hide"}
-                        variants={variants}
+      <section ref={el => cref = el}>
+        <div className={`${styles.projectBoxNextContainer} content-padding`}>
+          <div className={styles.projectBoxNextContainerInner}>
+            <div className={styles.projectBoxThumbContainer}>
+              <div
+                onMouseEnter={() => {
+                  if (!clicked) onCursor("caption", "NEXT");
+                }}
+                onMouseLeave={() => {
+                  onCursor();
+                }}
+                onClick={() => {
+                  setClicked(true);
+                  onCursor();
+                  const q = gsap.utils.selector(cref),
+                    mask_rect = q(`.${styles.thumbImage}`)[0].getBoundingClientRect(),
+                    img_rect = q('img')[0].getBoundingClientRect();
+                  dispatch({
+                    type: "THUMB_POSITION_TYPE", thumbPosition: {
+                      mask_rect: mask_rect,
+                      img_rect: img_rect
+                    }
+                  })
+                }}
+              >
+                <Link href={`/project/${project.attributes.slug}`}>
+                  <a>
+                    <motion.div className={styles.projectBoxThumb}
+                      exit={clicked ? "move" : "hide"}
+                      variants={variants}
+                    >
+                      <motion.div className={styles.info}
+                        exit={{ opacity: 0 }}
+                        transition={transition_opacity}
                       >
-                        <motion.div className={styles.info}
-                          exit={{ opacity: 0 }}
-                          transition={transition_opacity}
-                        >
-                          {/*<div className={styles.caption}>
-                            {project.attributes.caption}
-                          </div>*/}
-                          <h3>
-                            {project.attributes.title}
-                          </h3>
-                        </motion.div>
-                        <div className={styles.thumbImage} style={{ paddingBottom: `${imageHeightPercent}%` }}>
-                          <div className={styles.thumbImageMarginLeft}></div>
-                          <StrapiImage image={imageData} />
-                          <div className={styles.thumbImageMarginRight}></div>
-                        </div>
+                        <h3>
+                          {project.attributes.title}
+                        </h3>
                       </motion.div>
-                    </a>
-                  </Link>
-                </div>
+                      <div className={styles.thumbImage} style={{ paddingBottom: `${imageHeightPercent}%` }}>
+                        <div className={styles.thumbImageMarginLeft}></div>
+                        <StrapiImage image={imageData} />
+                        <div className={styles.thumbImageMarginRight}></div>
+                      </div>
+                    </motion.div>
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
-        </section>
-        : <></>
-      }
+        </div>
+      </section>
     </>
   )
 }
